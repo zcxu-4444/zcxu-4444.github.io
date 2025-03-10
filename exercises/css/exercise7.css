@@ -1,8 +1,9 @@
 body{
     font-family: Avenir;
     margin: 0;
+    background-image: url("../images/glitch_background.jpg"); \*doesn't work for some reason :((*/
     background-image: linear-gradient(-90deg, black, darkred);    
-    background-image: url("../images/glitch_background.jpg");
+
 }
 
 h1{
