@@ -1,7 +1,7 @@
 body{
     font-family: Avenir;
     margin: 0;
-    background-image: linear-gradient(-90deg, black, darkred);
+    background-color: linear-gradient(-90deg, black, darkred);
 
 }
 
