@@ -42,12 +42,12 @@ hr {
 
 @media only screen and (orientation = portrait){
     li{
-        border:#800000;
+        border:hotpink;
     }   
 }
 
 @media only screen and (orientation = landscape){
     li{
-        border:#282829;
+        border:greenyellow;
     } 
 }
