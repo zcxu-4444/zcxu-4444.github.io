@@ -1,4 +1,4 @@
-@media screen and (orientation=portrait){
+@media screen and (orientation: portrait){
     li{
         display:inline-block;
         border: 2px blueviolet solid;
@@ -8,7 +8,7 @@
     } 
 }
 
-@media screen and (orientation=landscape){
+@media screen and (orientation: landscape){
     li{
         display:inline-block;
         border: 2px hotpink solid;
