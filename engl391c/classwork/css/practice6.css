@@ -1,0 +1,19 @@
+@media screen and (orientation=portrait){
+    li{
+        display:inline-block;
+        border: 2px blueviolet solid;
+        margin: 10px;
+        padding: 5px;
+        height: 20px;
+    } 
+}
+
+@media screen and (orientation=landscape){
+    li{
+        display:inline-block;
+        border: 2px hotpink solid;
+        margin: 10px;
+        padding: 5px;
+        height: 20px;
+    }
+}
