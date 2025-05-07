@@ -1,0 +1,192 @@
+.kode-mono-cool {
+    font-family: "Kode Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.dela-gothic-one-regular {
+    font-family: "Dela Gothic One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color:#ffffff;
+    
+}  
+
+.hometop{ /* Top part of the page */
+    display: grid;
+    grid-template-columns: 4fr 1fr 4fr;
+    grid-template-rows: 1fr 1fr;
+
+    background-color: #3f3f3f;
+
+}
+
+.hometop header{
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+    background-color: #1d1d1d;
+    margin: 20px;
+    padding:2fr;
+    padding-right: 1rem;
+
+    font-family: "Dela Gothic One", sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+    font-style: normal;
+    text-transform: uppercase;
+    text-shadow: 8px -2px #7e0000;
+
+    letter-spacing: 5px;
+    line-height: 80px;
+
+    text-align:right;
+}
+
+.logo{
+    object-position: left;
+}
+
+.headimg{
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    
+    padding: 1rem;
+
+}
+
+.hometop ul{
+    
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 3;
+    grid-column-end: 4;
+
+    background-color: black;
+    
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    padding: 1rem;
+
+    list-style: none;
+}
+
+.hometop li{
+    padding: 1rem;
+}
+
+.animation{
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 3;
+    grid-column-end: 4;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem; 
+
+    object-fit: cover;
+
+    width: 1000px;
+    overflow: hidden;
+    display: block;
+}
+
+#eye{
+    margin-bottom: -100px;
+    margin-top: -100px;
+}
+
+a{
+    color:white;
+}
+.homebottom{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: #1b1b1b;
+
+
+}
+
+.homebottom nav{
+    text-decoration: solid underline #7E0000 6px; 
+}
+
+p{
+    padding:1pt;
+}
+
+nav{
+    font-family: "Kode Mono", monospace;
+    font-weight: 500;
+    font-size: 50px;
+    
+}
+
+nav li{
+    list-style-type:none;
+    padding: 1rem;
+
+    background-color: #1b1b1b;
+}
+
+nav a{
+    text-decoration: none;
+    color: #ffffff;
+    padding:1.5rem;
+}
+
+nav a:hover{
+    color:#7E0000;
+}
+
+nav ul{
+    padding: 25px;
+    margin: 0;
+    background-color: #1b1b1b;
+    
+}
+
+ul li ul.dropdown{ /* Dropdown of nav bar*/
+    position:absolute;
+    z-index: 999;
+
+    background-color: #1b1b1b;
+    
+    display: none;
+
+}
+
+ul li:hover ul.dropdown{ /* Hover dropdown of nav bar*/
+    display:inline;
+    background-color: #7E0000;
+    padding: 1rem;
+}
+
+.underline{
+    text-underline-offset: 10px;
+
+}
+
+footer{
+    background-color: #000000;
+    color:#ffffff;
+
+    text-align: center;
+    padding: 1rem;
+
+    font-family: "Kode Mono", monospace;
+}
