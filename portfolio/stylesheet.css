@@ -1,0 +1,348 @@
+.kode-mono-cool {
+    font-family: "Kode Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.dela-gothic-one-regular {
+    font-family: "Dela Gothic One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.space-grotesk-cool{
+    font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+
+    color:#ffffff;
+}  
+
+html body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.homestructure{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+
+    color:#ffffff;
+    display: grid;
+    grid-template-rows: 31% 61% 8%;
+    height: 100vh; /* Full viewport height */
+}
+
+.hometop{ /* Top part of the page */
+
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 5fr;
+    grid-template-rows: 1fr 2fr;
+
+    background-color: #3f3f3f;
+
+}
+
+.logo{
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+
+    justify-content: center;
+    margin-top: 3rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+
+
+}
+
+.hometop header{
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+    background-color: #1d1d1d;
+    background-size: contain;
+    
+    padding-right: 1rem;
+    padding-left: 1rem;
+
+
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+
+    font-family: "Dela Gothic One", sans-serif;
+    font-weight: 100;
+    font-size: .8rem;
+    font-style: normal;
+    text-transform: uppercase;
+    text-shadow: 8px -2px #7e0000;
+
+    padding-top: 5%;
+    letter-spacing: 5px;
+    text-align: right;
+}
+
+
+.headimg{
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    
+    margin: 5%;
+
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit:fill;
+    overflow:hidden;
+    justify-content: center;
+}
+
+.hometop ul{
+    
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 4;
+    grid-column-end: 5;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    list-style: none;
+
+    margin-bottom: 0%;
+}
+
+.hometop li{
+
+    margin-right: 2.5rem;
+    margin-left: 2.5rem;
+
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+
+    background-color: #1b1b1b;
+}
+
+.animation{
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 4;
+    grid-column-end: 5;
+
+    object-fit: cover;
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    
+    object-fit: contain;
+    overflow: hidden;
+
+    padding-top: 0%;
+    margin-top: 0%;
+    margin-left:1%;
+}
+
+#eye{
+    width: 100%;
+    height: auto;
+    max-height: 75%;
+    object-fit: cover;
+}
+
+a{
+    color:white;
+}
+
+.homebottom{
+
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    display: grid;
+    grid-template-columns: 4fr 5fr;
+    background-color: #1b1b1b;
+}
+
+.homebottom nav{
+    text-decoration: solid underline #7E0000 6px; 
+}
+
+main p{
+    margin:5px;
+    padding:1pt;
+    font-family: "Space Grotesk", sans-serif;
+
+}
+
+nav{
+    font-family: "Kode Mono", monospace;
+    font-size: 2rem;
+    padding-top: 2rem;
+
+    
+}
+
+nav li{
+    list-style-type:none;
+    padding: 1rem;
+
+    background-color: #1b1b1b;
+}
+
+nav a{
+    text-decoration: none;
+    color: #ffffff;
+    padding:1.5rem;
+}
+
+nav a:hover{
+    color:#7E0000;
+}
+
+nav ul{
+    padding: 25px;
+    margin: 0;
+    background-color: #1b1b1b;
+    
+}
+
+ul li ul.dropdown{ /* Dropdown of nav bar*/
+    position:absolute;
+    z-index: 999;
+
+    background-color: #1b1b1b;
+    
+    display: none;
+
+}
+
+ul li:hover ul.dropdown{ /* Hover dropdown of nav bar*/
+    display:inline;
+    background-color: #7E0000;
+    padding: 1rem;
+}
+
+.underline{
+    text-underline-offset: 10px;
+
+}
+
+.hometop, .homebottom { /* Makes sure that home top and bottom sections don't overlap*/
+    min-height: 0;
+    overflow: hidden;
+}
+
+main{
+    overflow: scroll;
+}
+
+main h1{
+    font-family: "Kode Mono", monospace;
+    letter-spacing: 3px;
+
+    margin-top:1%;
+    margin-bottom:0%;
+}
+
+main img{
+    max-width: 30%;
+    border: 4px solid #7E0000;
+
+}
+
+main h2{
+    font-family: "Kode Mono", monospace;
+
+}
+
+main ul{
+    font-family: "Space Grotesk", sans-serif; 
+}
+
+main a:hover{
+    color:#7E0000;
+}
+
+footer{
+    grid-row-start: 3;
+    grid-row-end: 4;
+
+    background-color: #000000;
+    color:#ffffff;
+
+    text-align: center;
+
+    font-family: "Kode Mono", monospace;
+}
+
+article{ /* For traditional and digital art porfolio pages */
+
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+    background-color: white;
+    border: 2px solid #7E0000;
+    padding: 1.3rem;
+    margin: 0.8rem;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(5px 5px 5px #970000);
+    
+    overflow: scroll;
+
+    color:#000000;
+
+}
+
+article p{
+    font-family: "Space Grotesk", sans-serif; 
+}
+
+article h2{
+    font-family: "Kode Mono", monospace;
+}
+
+article h3{
+    font-family: "Space Grotesk", sans-serif; 
+}
+
+
+article a:link{
+    color:#000000;
+    font-family: "Kode Mono", monospace;
+}
+
+article a:hover{
+    color:#7E0000;
+}
+
+article img{
+    max-width: 70%;
+}
