@@ -50,11 +50,33 @@ const palette = {
 
 let startImg = null;
 
+// ---- music
+let shiqutrack   = null;   // all other scenes
+let shouxingtrack = null;  // milestones
+let yinmantrack  = null;   // prep phase
+let currentTrack = null;
+
+function playTrack(track) {
+  if (!track) return;
+  if (currentTrack === track) return; // already playing this one
+  if (currentTrack && currentTrack.isPlaying()) currentTrack.stop();
+  currentTrack = track;
+  track.loop();
+}
+
+function stopMusic() {
+  if (currentTrack && currentTrack.isPlaying()) currentTrack.stop();
+  currentTrack = null;
+}
+
 function preload() {
-  eventsData     = loadJSON('events.json');
-  alliesData     = loadJSON('allies.json');
+  eventsData = loadJSON('events.json');
+  alliesData = loadJSON('allies.json');
   attributesData = loadJSON('attributes.json');
-  startImg       = loadImage('startpage.JPG');
+  startImg = loadImage('startpage.JPG');
+  shiqutrack = loadSound('shiqu.mp3');
+  shouxingtrack = loadSound('shouxing.mp3');
+  yinmantrack = loadSound('yinman.mp3');
 }
 
 function setup() {
@@ -179,7 +201,6 @@ function drawStat(label, value, max, x, y, barW, barH, col) {
   push();
   textFont('Newsreader');
   textSize(15);
-
   let lw = 80;
   fill(palette.cream); noStroke(); textAlign(LEFT, CENTER);
   text(label, x, y + barH / 2);
@@ -207,7 +228,7 @@ function wrapText(txt, maxW) {
 function drawHint(msg) {
   push();
   fill(palette.muted); noStroke();
-  textFont('Newsreader'); textSize(15);
+  textFont('Newsreader'); textSize(16);
   textAlign(CENTER, BOTTOM); textStyle(ITALIC);
   text(msg, width / 2, height - 14);
   textStyle(NORMAL);
@@ -340,37 +361,15 @@ class Backgrounds {
     }
     pop();
   }
-
-  static overlay() {
-    push(); noStroke();
-    let vig = drawingContext.createRadialGradient(
-      width/2, height/2, height*0.2,
-      width/2, height/2, height*0.85
-    );
-    vig.addColorStop(0, 'rgba(0,0,0,0)');
-    vig.addColorStop(1, 'rgba(0,0,0,0.55)');
-    drawingContext.fillStyle = vig;
-    rect(0, 0, width, height);
-    pop();
-  }
-}
-
-// --- background music
-class BGM {
-  constructor() { this.playing = false; }
-  play()  {}
-  pause() {}
-  stop()  {}
 }
 
 // --- Intro scene
 // Press Space to begin
 class IntroScene {
   constructor() { this.alpha = 0; }
-  onEnter()     { this.alpha = 0; }
+  onEnter()     { this.alpha = 0; stopMusic(); }
 
   draw() {
-    // Draw startpage image cover-fit
     if (startImg) {
       let imgAspect = startImg.width / startImg.height;
       let canvasAspect = width / height;
@@ -385,7 +384,6 @@ class IntroScene {
       image(startImg, dx, dy, dw, dh);
     } else {
       Backgrounds.palace();
-      Backgrounds.overlay();
     }
     drawHint('Press Space to enter the palace');
   }
@@ -394,7 +392,6 @@ class IntroScene {
 }
 
 // ---- PrepScene 
-// Space / Enter  proceed to ally selection
 class PrepScene {
   constructor() { this.statPanel = null; this.opts = []; }
 
@@ -409,6 +406,7 @@ class PrepScene {
         this.opts.push({ id, def: defs[id] });
       }
     }
+    playTrack(yinmantrack);
   }
 
   _buy(i) {
@@ -425,7 +423,6 @@ class PrepScene {
 
   draw() {
     Backgrounds.palace();
-    Backgrounds.overlay();
     this.statPanel.draw();
 
     const cost  = attributesData.cost_per_allocation;
@@ -464,8 +461,7 @@ class PrepScene {
   }
 }
 
-// ---- AllyScene
-// Space / Enter  confirm selection
+// ---- AllyScene (counts as prep, keep yinman)
 class AllyScene {
   constructor() { this.cards = []; this.selectedIdx = -1; }
 
@@ -485,6 +481,7 @@ class AllyScene {
       this.cards.push(card);
       sx += cw + gap;
     });
+    playTrack(yinmantrack); // still prep phase
   }
 
   _select(i) {
@@ -495,7 +492,6 @@ class AllyScene {
 
   draw() {
     Backgrounds.palace();
-    Backgrounds.overlay();
     push();
     textFont('Newsreader');
     fill(palette.gold); noStroke(); textAlign(CENTER, TOP); textSize(26);
@@ -519,14 +515,18 @@ class AllyScene {
 }
 
 // ---- EventScene 
-// 1 / 2 / 3  pick choice
 class EventScene {
   constructor() { this.statPanel = null; }
-  onEnter() { this.statPanel = new StatPanel(width - 210, 60, 190, 195); }
+
+  onEnter() {
+    this.statPanel = new StatPanel(width - 210, 60, 190, 195);
+    // milestone years get shouxing, all others get shiqu
+    const ev = eventsData[gs.year];
+    playTrack(ev.milestone ? shouxingtrack : shiqutrack);
+  }
 
   draw() {
     Backgrounds.palace();
-    Backgrounds.overlay();
     this.statPanel.draw();
 
     const ev    = eventsData[gs.year];
@@ -571,15 +571,13 @@ class EventScene {
   }
 }
 
-// ---- ResultScene
-// Click anywhere to continue
+// ---- ResultScene (keep current track playing)
 class ResultScene {
   constructor() { this.alpha = 0; }
-  onEnter()     { this.alpha = 0; }
+  onEnter()     { this.alpha = 0; } // no music change, let current track continue
 
   draw() {
     Backgrounds.palace();
-    Backgrounds.overlay();
     if (this.alpha < 255) this.alpha = min(255, this.alpha + 3);
 
     push();
@@ -621,10 +619,12 @@ class ResultScene {
 }
 
 // ---- DeathScene 
-// Click anywhere → full reset
 class DeathScene {
   constructor() { this.alpha = 0; }
-  onEnter()     { this.alpha = 0; }
+  onEnter() {
+    this.alpha = 0;
+    playTrack(shiqutrack); // shiqu for death/other
+  }
 
   draw() {
     background(0);
@@ -654,7 +654,6 @@ class DeathScene {
 }
 
 // ---- EndScene
-// Click anywhere → full reset
 class EndScene {
   _ending() {
     if (gs.suspicion >= 8)   return { title: 'Condemned',     body: 'Your accumulated suspicion proved fatal. The palace closed around you like a fist.',                                         col: palette.red   };
@@ -663,9 +662,10 @@ class EndScene {
     return                          { title: 'A Life Endured', body: 'You survived thirty-five years inside these walls. Not in triumph, not in ruin — but in stubborn, steady endurance.',      col: palette.cream };
   }
 
+  onEnter() { playTrack(shiqutrack); }
+
   draw() {
     Backgrounds.palace();
-    Backgrounds.overlay();
     const end = this._ending();
     push();
     textFont('Newsreader');
