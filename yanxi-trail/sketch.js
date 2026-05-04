@@ -1,4 +1,3 @@
-
 let eventsData     = [];
 let alliesData     = {};
 let attributesData = {};
@@ -38,25 +37,29 @@ function switchScene(name) {
 
 // ---- palette
 const palette = {
-  bg: '#000000',
-  paper: '#2b1212',
-  gold: '#c9963c',
-  goldLight: '#f0c96e',
-  cream: '#f5e6c8',
+  bg: '#8da4a1',
+  paper: '#A7BDBB',
+  gold: '#7C504F',
+  goldLight: '#a66b6a',
+  cream: '#f6ebc8',
   red: '#8D1C1C',
   redLight: '#b52828',
   jade: '#4a7c59',
   muted: '#7a5c5c',
 };
 
+let startImg = null;
+
 function preload() {
   eventsData     = loadJSON('events.json');
   alliesData     = loadJSON('allies.json');
   attributesData = loadJSON('attributes.json');
+  startImg       = loadImage('startpage.JPG');
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  pixelDensity(displayDensity());
   textFont('Newsreader');
 
   scenes.intro = new IntroScene();
@@ -75,7 +78,7 @@ function draw() {
   if (currentScene) currentScene.draw();
 }
 
-// ── Global input routing ──────────────────────────────────────
+// ---- Global input routing 
 function mousePressed() {
   if (currentScene && currentScene.mousePressed) currentScene.mousePressed();
 }
@@ -84,7 +87,7 @@ function keyPressed() {
   if (currentScene && currentScene.keyPressed) currentScene.keyPressed(key, keyCode);
 }
 
-// ── Game logic helpers ────────────────────────────────────────
+// ---- Game logic helpers ----
 function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
 function applyConsequences(cons) {
@@ -151,7 +154,7 @@ function selectChoice(i) {
   else switchScene('result');
 }
 
-// ── Shared draw helpers ───────────────────────────────────────
+// ---- Shared draw helpers 
 function drawPanel(x, y, w, h, alpha) {
   if (alpha === undefined) alpha = 220;
   push();
@@ -175,14 +178,16 @@ function goldDivider(x, y, w) {
 function drawStat(label, value, max, x, y, barW, barH, col) {
   push();
   textFont('Newsreader');
-  fill(palette.cream); noStroke(); textSize(11); textAlign(LEFT, CENTER);
+  textSize(15);
+
+  let lw = 80;
+  fill(palette.cream); noStroke(); textAlign(LEFT, CENTER);
   text(label, x, y + barH / 2);
-  let lw = textWidth(label) + 8;
   fill(palette.bg); stroke(palette.muted); strokeWeight(0.5);
   rect(x + lw, y, barW, barH, 2);
   noStroke(); fill(col || palette.jade);
   rect(x + lw, y, map(value, 0, max, 0, barW), barH, 2);
-  fill(palette.cream); textAlign(RIGHT, CENTER); textSize(10);
+  fill(palette.cream); textAlign(RIGHT, CENTER); textSize(14);
   text(value, x + lw + barW - 3, y + barH / 2);
   pop();
 }
@@ -202,7 +207,7 @@ function wrapText(txt, maxW) {
 function drawHint(msg) {
   push();
   fill(palette.muted); noStroke();
-  textFont('Newsreader'); textSize(11);
+  textFont('Newsreader'); textSize(15);
   textAlign(CENTER, BOTTOM); textStyle(ITALIC);
   text(msg, width / 2, height - 14);
   textStyle(NORMAL);
@@ -217,24 +222,23 @@ function drawOptionRow(numLabel, mainText, subText, x, y, rowW, rowH, dimmed) {
   rect(x, y, rowW, rowH, 4);
 
   fill(dimmed ? palette.muted : palette.gold);
-  noStroke(); textFont('Newsreader'); textSize(15); textAlign(LEFT, TOP);
+  noStroke(); textFont('Newsreader'); textSize(19); textAlign(LEFT, TOP);
   text(numLabel, x + 12, y + (rowH - 20) / 2);
 
   fill(dimmed ? palette.muted : palette.cream);
-  textSize(13); textAlign(LEFT, TOP);
+  textSize(17); textAlign(LEFT, TOP);
   let lines = wrapText(mainText, rowW - 70);
   let ly = y + 10;
   for (let l of lines) { text(l, x + 52, ly); ly += 18; }
 
   if (subText) {
-    fill(palette.muted); textSize(10);
+    fill(palette.muted); textSize(14);
     let slines = wrapText(subText, rowW - 70);
     for (let l of slines.slice(0, 2)) { text(l, x + 52, ly); ly += 13; }
   }
   pop();
 }
 
-// ── StatPanel ─────────────────────────────────────────────────
 class StatPanel {
   constructor(x, y, w, h) { this.x = x; this.y = y; this.w = w; this.h = h; }
 
@@ -242,29 +246,32 @@ class StatPanel {
     drawPanel(this.x, this.y, this.w, this.h);
     push();
     textFont('Newsreader');
-    fill(palette.gold); textSize(12); textAlign(CENTER);
-    text('— Stats —', this.x + this.w / 2, this.y + 18);
-    let statY = this.y + 34;
-    let bx = this.x + 10, bw = this.w - 20, bh = 12, gap = 20;
-    textSize(10);
+    fill(palette.gold); textSize(15); textAlign(CENTER);
+    text('— Stats —', this.x + this.w / 2, this.y + 22);
     const stats = [
-      { label:'Food',       val: gs.food,       col:'#c8a04a' },
-      { label:'Health',     val: gs.health,      col:'#b52828' },
-      { label:'Beauty',     val: gs.beauty,      col:'#c97090' },
-      { label:'Compassion', val: gs.compassion,  col:'#4a7c59' },
-      { label:'Suspicion',  val: gs.suspicion,   col:'#7a3c3c' },
+      { label: 'Food',       val: gs.food       },
+      { label: 'Health',     val: gs.health     },
+      { label: 'Beauty',     val: gs.beauty     },
+      { label: 'Compassion', val: gs.compassion },
+      { label: 'Suspicion',  val: gs.suspicion  },
     ];
+    let statY = this.y + 44;
+    const gap = 22;
+    textSize(13);
     for (let s of stats) {
-      drawStat(s.label, s.val, 10, bx, statY, bw - 40, bh, s.col);
+      fill(palette.muted); textAlign(LEFT, TOP);
+      text(s.label, this.x + 12, statY);
+      fill(palette.gold); textAlign(RIGHT, TOP);
+      text(s.val, this.x + this.w - 12, statY);
       statY += gap;
     }
     statY += 4;
     goldDivider(this.x + 10, statY, this.w - 20);
-    statY += 12;
-    fill(palette.gold); textSize(11); textAlign(LEFT, TOP);
-    text('Coins: ' + gs.money, this.x + 10, statY);
-    fill(palette.muted); textSize(10); textAlign(RIGHT, TOP);
-    text(gs.status, this.x + this.w - 10, statY);
+    statY += 14;
+    fill(palette.gold); textSize(13); textAlign(LEFT, TOP);
+    text('Coins: ' + gs.money, this.x + 12, statY);
+    fill(palette.muted); textAlign(RIGHT, TOP);
+    text(gs.status, this.x + this.w - 12, statY);
     pop();
   }
 }
@@ -287,16 +294,16 @@ class NPCCard {
 
     fill(this.selected ? palette.goldLight : palette.gold);
     noStroke(); textFont('Newsreader');
-    textSize(13); textAlign(LEFT, TOP);
+    textSize(17); textAlign(LEFT, TOP);
     text('[' + this.num + ']', this.x + 8, this.y + 8);
 
-    fill(palette.goldLight); textSize(13); textAlign(CENTER, TOP);
+    fill(palette.goldLight); textSize(17); textAlign(CENTER, TOP);
     text(this.ally.name, this.x + this.w / 2, this.y + 12);
 
-    fill(palette.muted); textSize(10);
+    fill(palette.muted); textSize(14);
     text(this.ally.role, this.x + this.w / 2, this.y + 30);
 
-    fill(palette.cream); textSize(10); textAlign(LEFT, TOP);
+    fill(palette.cream); textSize(14); textAlign(LEFT, TOP);
     let lines = wrapText(this.ally.desc, this.w - 16);
     let ly = this.y + 50;
     for (let l of lines) { text(l, this.x + 8, ly); ly += 14; }
@@ -305,29 +312,25 @@ class NPCCard {
     let bonusParts = [];
     for (let [k, v] of Object.entries(b)) bonusParts.push((v > 0 ? '+' : '') + v + ' ' + k);
     if (bonusParts.length) {
-      fill(palette.jade); textSize(9); textAlign(CENTER, TOP);
+      fill(palette.jade); textSize(13); textAlign(CENTER, TOP);
       text(bonusParts.join(', '), this.x + this.w / 2, ly + 4); ly += 16;
     }
     if (this.ally.scandal_shield) {
-      fill(palette.jade); textSize(9); textAlign(CENTER, TOP);
+      fill(palette.jade); textSize(13); textAlign(CENTER, TOP);
       text('✦ Scandal Shield', this.x + this.w / 2, ly + 4);
     }
     if (this.selected) {
-      fill(palette.goldLight); textSize(11); textAlign(CENTER, BOTTOM);
+      fill(palette.goldLight); textSize(15); textAlign(CENTER, BOTTOM);
       text('✓ Selected', this.x + this.w / 2, this.y + this.h - 8);
     }
     pop();
   }
 }
 
-// ── Backgrounds ───────────────────────────────────────────────
 class Backgrounds {
   static palace() {
     push();
-    for (let y = 0; y < height; y++) {
-      stroke(lerpColor(color('#0d0505'), color('#1a0a0a'), y / height));
-      line(0, y, width, y);
-    }
+    background('#8da4a1');
     noStroke();
     for (let px of [width * 0.1, width * 0.9]) {
       for (let a = 10; a >= 2; a -= 2) {
@@ -335,19 +338,6 @@ class Backgrounds {
         rect(px - 18 + (10 - a), 0, 36 - (10 - a) * 2, height);
       }
     }
-    stroke(palette.gold); strokeWeight(0.8); noFill();
-    let m = 22;
-    arc(m,         m,          40, 40, PI,        PI+HALF_PI);
-    arc(m,         m,          20, 20, PI,        PI+HALF_PI);
-    arc(width-m,   m,          40, 40, -HALF_PI,  0);
-    arc(width-m,   m,          20, 20, -HALF_PI,  0);
-    arc(m,         height-m,   40, 40, HALF_PI,   PI);
-    arc(m,         height-m,   20, 20, HALF_PI,   PI);
-    arc(width-m,   height-m,   40, 40, 0,         HALF_PI);
-    arc(width-m,   height-m,   20, 20, 0,         HALF_PI);
-    strokeWeight(0.5);
-    line(60, 18, width-60, 18);       line(60, 24, width-60, 24);
-    line(60, height-18, width-60, height-18); line(60, height-24, width-60, height-24);
     pop();
   }
 
@@ -374,58 +364,42 @@ class BGM {
 }
 
 // --- Intro scene
-// Click anywhere to begin
+// Press Space to begin
 class IntroScene {
   constructor() { this.alpha = 0; }
   onEnter()     { this.alpha = 0; }
 
   draw() {
-    Backgrounds.palace();
-    Backgrounds.overlay();
-    if (this.alpha < 255) this.alpha = min(255, this.alpha + 2);
-
-    push();
-    drawingContext.globalAlpha = this.alpha / 255;
-    textFont('Newsreader');
-
-    fill(palette.gold); noStroke();
-    textAlign(CENTER, CENTER); textSize(38);
-    text('魏璎珞', width / 2, height / 2 - 130);
-
-    textSize(18); fill(palette.goldLight);
-    text('Entering the Forbidden Palace', width / 2, height / 2 - 88);
-
-    goldDivider(width / 2 - 200, height / 2 - 66, 400);
-
-    fill(palette.cream); textSize(13);
-    const lines = [
-      'It is the Qing Dynasty, 1741.',
-      'You are sixteen years old, sharp-minded and nimble-handed.',
-      'You have entered the Forbidden Palace to find your sister\'s murderer.',
-      'They could be anyone... a fellow maid, a concubine, the Emperor himself.',
-    ];
-    
-    let ty = height / 2 - 42;
-    for (let l of lines) { text(l, width / 2, ty); ty += 24; }
-    goldDivider(width / 2 - 200, ty + 8, 400);
-
-    drawingContext.globalAlpha = 1;
-    pop();
-
-    drawHint('Click anywhere to enter the palace');
+    // Draw startpage image cover-fit
+    if (startImg) {
+      let imgAspect = startImg.width / startImg.height;
+      let canvasAspect = width / height;
+      let dw, dh, dx, dy;
+      if (canvasAspect > imgAspect) {
+        dw = width; dh = width / imgAspect;
+      } else {
+        dh = height; dw = height * imgAspect;
+      }
+      dx = (width - dw) / 2;
+      dy = (height - dh) / 2;
+      image(startImg, dx, dy, dw, dh);
+    } else {
+      Backgrounds.palace();
+      Backgrounds.overlay();
+    }
+    drawHint('Press Space to enter the palace');
   }
 
-  mousePressed() { advanceYear(); }
+  keyPressed(k, kc) { if (k === ' ' || kc === 32) advanceYear(); }
 }
 
-// ── PrepScene ─────────────────────────────────────────────────
-// 1–N  buy option N
+// ---- PrepScene 
 // Space / Enter  proceed to ally selection
 class PrepScene {
   constructor() { this.statPanel = null; this.opts = []; }
 
   onEnter() {
-    this.statPanel = new StatPanel(width - 230, 60, 210, 245);
+    this.statPanel = new StatPanel(width - 210, 60, 190, 195);
     this.opts = [];
     const ev   = eventsData[gs.year];
     const defs = attributesData.options;
@@ -459,9 +433,9 @@ class PrepScene {
 
     push();
     textFont('Newsreader');
-    fill(palette.gold); noStroke(); textAlign(CENTER, TOP); textSize(22);
+    fill(palette.gold); noStroke(); textAlign(CENTER, TOP); textSize(26);
     text('Year ' + (gs.year + 1) + ' — Prepare Yourself', mainW / 2, 28);
-    textSize(12); fill(palette.muted);
+    textSize(16); fill(palette.muted);
     text('Each purchase costs ' + cost + ' coins  ·  You have ' + gs.money + ' coins', mainW / 2, 58);
     goldDivider(60, 78, mainW - 80);
 
@@ -490,8 +464,7 @@ class PrepScene {
   }
 }
 
-// ── AllyScene ─────────────────────────────────────────────────
-// 1–N  highlight ally N
+// ---- AllyScene
 // Space / Enter  confirm selection
 class AllyScene {
   constructor() { this.cards = []; this.selectedIdx = -1; }
@@ -525,9 +498,9 @@ class AllyScene {
     Backgrounds.overlay();
     push();
     textFont('Newsreader');
-    fill(palette.gold); noStroke(); textAlign(CENTER, TOP); textSize(22);
+    fill(palette.gold); noStroke(); textAlign(CENTER, TOP); textSize(26);
     text('Choose Your Alliance', width / 2, 28);
-    textSize(12); fill(palette.muted);
+    textSize(16); fill(palette.muted);
     text('Your ally grants a passive bonus each year and may shield you from scandal.', width / 2, 58);
     goldDivider(80, 78, width - 160);
     pop();
@@ -545,11 +518,11 @@ class AllyScene {
   }
 }
 
-// ── EventScene ────────────────────────────────────────────────
+// ---- EventScene 
 // 1 / 2 / 3  pick choice
 class EventScene {
   constructor() { this.statPanel = null; }
-  onEnter() { this.statPanel = new StatPanel(width - 230, 60, 210, 245); }
+  onEnter() { this.statPanel = new StatPanel(width - 210, 60, 190, 195); }
 
   draw() {
     Backgrounds.palace();
@@ -563,18 +536,18 @@ class EventScene {
     push();
     textFont('Newsreader');
 
-    fill(palette.muted); noStroke(); textAlign(LEFT, TOP); textSize(11);
+    fill(palette.muted); noStroke(); textAlign(LEFT, TOP); textSize(15);
     text('Year ' + (gs.year + 1) + '  ·  Age ' + ev.age, 60, 24);
     if (ev.milestone) {
-      fill(palette.gold); textAlign(RIGHT, TOP); textSize(10);
+      fill(palette.gold); textAlign(RIGHT, TOP); textSize(14);
       text('★ MILESTONE', mainW - 10, 24);
     }
 
-    fill(palette.goldLight); textAlign(CENTER, TOP); textSize(24);
+    fill(palette.goldLight); textAlign(CENTER, TOP); textSize(28);
     text(ev.title, cx, 44);
     goldDivider(60, 76, mainW - 70);
 
-    fill(palette.cream); textSize(14); textAlign(CENTER, TOP);
+    fill(palette.cream); textSize(18); textAlign(CENTER, TOP);
     const storyLines = wrapText(ev.story, mainW - 120);
     let ty = 94;
     for (let l of storyLines) { text(l, cx, ty); ty += 22; }
@@ -598,7 +571,7 @@ class EventScene {
   }
 }
 
-// ── ResultScene ───────────────────────────────────────────────
+// ---- ResultScene
 // Click anywhere to continue
 class ResultScene {
   constructor() { this.alpha = 0; }
@@ -619,11 +592,11 @@ class ResultScene {
     const py = (height - panelH) / 2;
 
     drawPanel(px, py, panelW, panelH);
-    fill(palette.gold); noStroke(); textAlign(CENTER, TOP); textSize(17);
+    fill(palette.gold); noStroke(); textAlign(CENTER, TOP); textSize(21);
     text('What Happened', px + panelW / 2, py + 18);
     goldDivider(px + 20, py + 44, panelW - 40);
 
-    fill(palette.cream); textSize(14); textAlign(CENTER, TOP);
+    fill(palette.cream); textSize(18); textAlign(CENTER, TOP);
     const lines = wrapText(gs.resultText, panelW - 70);
     let ty = py + 60;
     for (let l of lines) { text(l, px + panelW / 2, ty); ty += 22; }
@@ -633,7 +606,7 @@ class ResultScene {
       for (let [k, v] of Object.entries(gs.pendingConsequences))
         if (v !== 0) parts.push((v > 0 ? '+' : '') + v + ' ' + k);
       if (parts.length) {
-        fill(palette.muted); textSize(11); ty += 8;
+        fill(palette.muted); textSize(15); ty += 8;
         text(parts.join('  ·  '), px + panelW / 2, ty);
       }
     }
@@ -647,7 +620,7 @@ class ResultScene {
   mousePressed() { advanceYear(); }
 }
 
-// ── DeathScene ────────────────────────────────────────────────
+// ---- DeathScene 
 // Click anywhere → full reset
 class DeathScene {
   constructor() { this.alpha = 0; }
@@ -660,15 +633,15 @@ class DeathScene {
     drawingContext.globalAlpha = this.alpha / 255;
     textFont('Newsreader');
 
-    fill(palette.red); noStroke(); textAlign(CENTER, CENTER); textSize(32);
+    fill(palette.red); noStroke(); textAlign(CENTER, CENTER); textSize(36);
     text('薨逝', width / 2, height / 2 - 90);
 
-    fill(palette.cream); textSize(15);
+    fill(palette.cream); textSize(19);
     const lines = wrapText(gs.resultText, min(520, width - 120));
     let ty = height / 2 - 48;
     for (let l of lines) { text(l, width / 2, ty); ty += 24; }
 
-    fill(palette.muted); textSize(11); ty += 10;
+    fill(palette.muted); textSize(15); ty += 10;
     text('Year ' + (gs.year + 1) + '  ·  Age ' + eventsData[gs.year].age, width / 2, ty);
 
     drawingContext.globalAlpha = 1;
@@ -680,7 +653,7 @@ class DeathScene {
   mousePressed() { resetGS(); switchScene('intro'); }
 }
 
-// ── EndScene ──────────────────────────────────────────────────
+// ---- EndScene
 // Click anywhere → full reset
 class EndScene {
   _ending() {
@@ -696,14 +669,14 @@ class EndScene {
     const end = this._ending();
     push();
     textFont('Newsreader');
-    fill(end.col); noStroke(); textAlign(CENTER, CENTER); textSize(32);
+    fill(end.col); noStroke(); textAlign(CENTER, CENTER); textSize(36);
     text(end.title, width / 2, height / 2 - 90);
     goldDivider(width / 2 - 200, height / 2 - 66, 400);
-    fill(palette.cream); textSize(15);
+    fill(palette.cream); textSize(19);
     const lines = wrapText(end.body, 520);
     let ty = height / 2 - 40;
     for (let l of lines) { text(l, width / 2, ty); ty += 24; }
-    fill(palette.muted); textSize(11); ty += 14;
+    fill(palette.muted); textSize(15); ty += 14;
     text(
       'Final stats — Coins: ' + gs.money +
       '  Compassion: ' + gs.compassion +
@@ -717,7 +690,7 @@ class EndScene {
   mousePressed() { resetGS(); switchScene('intro'); }
 }
 
-// ── Window resize ─────────────────────────────────────────────
+// ---- Window resize 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   if (currentScene && currentScene.onEnter) currentScene.onEnter();
