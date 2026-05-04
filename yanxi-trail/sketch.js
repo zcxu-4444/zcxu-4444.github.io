@@ -73,10 +73,10 @@ function preload() {
   eventsData = loadJSON('events.json');
   alliesData = loadJSON('allies.json');
   attributesData = loadJSON('attributes.json');
-  startImg = loadImage('music/startpage.jpg');
-  shiqutrack = loadSound('music/shiqu.mp3');
-  shouxingtrack = loadSound('music/shouxing.mp3');
-  yinmantrack = loadSound('music/yinman.mp3');
+  startImg = loadImage('startpage.jpg');
+  shiqutrack = loadSound('shiqu.mp3');
+  shouxingtrack = loadSound('shouxing.mp3');
+  yinmantrack = loadSound('yinman.mp3');
 }
 
 function setup() {
