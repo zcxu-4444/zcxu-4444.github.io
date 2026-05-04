@@ -385,7 +385,6 @@ class IntroScene {
     } else {
       Backgrounds.palace();
     }
-    drawHint('Press Space to enter the palace');
   }
 
   keyPressed(k, kc) { if (k === ' ' || kc === 32) advanceYear(); }
