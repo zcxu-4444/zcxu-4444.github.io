@@ -1,0 +1,457 @@
+[
+  {
+    "year": 1, "age": 16,
+    "title": "Year 1: Yingluo enters the Forbidden Palace",
+    "milestone": true,
+    "story": "You are escorted through the vermillion gates for the first time. You are younger than most of the other maids — sixteen years old, and already the palace feels like a maze with no exit. Another embroidery maid whispers a warning as you pass: someone here already wants you gone.",
+    "choices": [
+      { "label": "Thank her and ask her name", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "She smiles cautiously. You may have made your first friend." },
+      { "label": "Stay quiet and keep walking", "consequences": { "compassion": 0, "suspicion": -1, "money": 0, "health": 0, "beauty": 0 }, "result": "You reveal nothing. A wise first move." },
+      { "label": "Report the whisper to the head maid", "consequences": { "compassion": -1, "suspicion": 1, "money": 5, "health": 0, "beauty": 0 }, "result": "The head maid rewards you with a small coin, but the other maids notice." }
+    ],
+    "prep_options": ["food", "health", "beauty", "savings"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 2, "age": 17,
+    "title": "The Stolen Embroidery",
+    "milestone": false,
+    "story": "A piece of embroidery you spent weeks on has gone missing from the workshop. The head maid is furious and demands to know who is responsible.",
+    "choices": [
+      { "label": "Accuse the maid you suspect", "consequences": { "compassion": -1, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "The accused maid is punished, but you have made an enemy." },
+      { "label": "Take the blame yourself", "consequences": { "compassion": 1, "suspicion": 0, "money": -10, "health": -1, "beauty": 0 }, "result": "You are fined and made to redo the work. Others are quietly grateful." },
+      { "label": "Investigate quietly before saying anything", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": 0, "beauty": 1 }, "result": "You find the thief yourself and handle it discreetly. Your reputation grows." }
+    ],
+    "prep_options": ["food", "health", "savings", "charity"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 3, "age": 18,
+    "title": "A Noble Lady's Favor",
+    "milestone": false,
+    "story": "A high-ranking noble lady visits the embroidery workshop and takes notice of your work. She invites you to embroider a personal gift for the Emperor.",
+    "choices": [
+      { "label": "Accept eagerly and work your hardest", "consequences": { "compassion": 0, "suspicion": 1, "money": 20, "health": -1, "beauty": 0 }, "result": "Your work impresses everyone, but rivals grow jealous." },
+      { "label": "Accept humbly and dedicate it to her household", "consequences": { "compassion": 1, "suspicion": 0, "money": 10, "health": 0, "beauty": 1 }, "result": "She is touched. You gain a small but genuine ally." },
+      { "label": "Politely decline, citing your low station", "consequences": { "compassion": 0, "suspicion": -1, "money": 0, "health": 0, "beauty": 0 }, "result": "She respects your modesty. You remain below the radar." }
+    ],
+    "prep_options": ["food", "health", "beauty", "palace_maintenance"],
+    "alliance_pool": ["noble_lady", "senior_eunuch", "none"]
+  },
+  {
+    "year": 4, "age": 19,
+    "title": "Rumours in the Courtyard",
+    "milestone": false,
+    "story": "Whispers circulate that a concubine in the eastern wing has been poisoning rivals. Your alliance partner pulls you aside — your name has been mentioned.",
+    "choices": [
+      { "label": "Go directly to the head eunuch to clear your name", "consequences": { "compassion": 0, "suspicion": -1, "money": -5, "health": 0, "beauty": 0 }, "result": "The eunuch vouches for you, but the visit costs a bribe." },
+      { "label": "Lay low and wait for the rumour to die", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "The rumour lingers longer than you hoped." },
+      { "label": "Find out who started the rumour", "consequences": { "compassion": -1, "suspicion": 0, "money": 0, "health": -1, "beauty": 0 }, "result": "You uncover the source, but the hunt exhausts you." }
+    ],
+    "prep_options": ["food", "health", "savings", "charity"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 5, "age": 20,
+    "title": "The Imperial Banquet",
+    "milestone": true,
+    "story": "You are assigned to serve at a grand imperial banquet. The Emperor himself walks past your station and pauses for a brief moment, glancing at you.",
+    "choices": [
+      { "label": "Meet his gaze and bow deeply", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": 0, "beauty": 1 }, "result": "He says nothing, but a senior concubine saw everything." },
+      { "label": "Keep your eyes down as protocol demands", "consequences": { "compassion": 0, "suspicion": -1, "money": 0, "health": 0, "beauty": 0 }, "result": "You are invisible. Safe, for now." },
+      { "label": "Offer him a small embroidered token you made", "consequences": { "compassion": 1, "suspicion": 2, "money": -5, "health": 0, "beauty": 1 }, "result": "He accepts it, amused. Every concubine in the hall now knows your face." }
+    ],
+    "prep_options": ["food", "health", "beauty", "palace_maintenance", "savings"],
+    "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
+  },
+  {
+    "year": 6, "age": 21,
+    "title": "Winter Illness",
+    "milestone": false,
+    "story": "A bitter cold sweeps the palace. Several servants fall ill. You feel the first signs of fever and must decide how to manage it.",
+    "choices": [
+      { "label": "Rest and spend coin on medicine", "consequences": { "compassion": 0, "suspicion": 0, "money": -15, "health": 1, "beauty": 0 }, "result": "You recover fully. Money well spent." },
+      { "label": "Push through and keep working", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": -2, "beauty": -1 }, "result": "You survive, but the illness takes a visible toll." },
+      { "label": "Ask your alliance partner for herbal remedies", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "They help you quietly. Your bond deepens." }
+    ],
+    "prep_options": ["food", "health", "savings"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 7, "age": 22,
+    "title": "A Generous Donation",
+    "milestone": false,
+    "story": "The palace is collecting donations for flood victims in the outer provinces. The amount you give — or don't give — will be noted.",
+    "choices": [
+      { "label": "Donate generously (30 copper coins)", "consequences": { "compassion": 2, "suspicion": -1, "money": -30, "health": 0, "beauty": 0 }, "result": "Your name is read aloud at the ceremony. People remember." },
+      { "label": "Donate a modest amount (10 copper coins)", "consequences": { "compassion": 1, "suspicion": 0, "money": -10, "health": 0, "beauty": 0 }, "result": "You give what you can. Nothing remarkable happens." },
+      { "label": "Donate nothing and keep your savings", "consequences": { "compassion": -1, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Others notice your absence from the list." }
+    ],
+    "prep_options": ["food", "health", "beauty", "savings", "charity"],
+    "alliance_pool": ["noble_lady", "senior_eunuch", "none"]
+  },
+  {
+    "year": 8, "age": 23,
+    "title": "The Forged Letter",
+    "milestone": false,
+    "story": "A letter bearing your seal — one you never wrote — is found in a senior concubine's chamber. She accuses you of plotting against her.",
+    "choices": [
+      { "label": "Deny everything and demand a formal inquiry", "consequences": { "compassion": 0, "suspicion": 2, "money": -20, "health": 0, "beauty": 0 }, "result": "The inquiry clears you, but the process is costly and public." },
+      { "label": "Apologise publicly even though you are innocent", "consequences": { "compassion": 0, "suspicion": -1, "money": 0, "health": -1, "beauty": -1 }, "result": "The tension eases, but your pride pays the price." },
+      { "label": "Use your alliance to find the forger", "consequences": { "compassion": 1, "suspicion": 0, "money": -10, "health": 0, "beauty": 0 }, "result": "The real culprit is exposed. Your alliance proves its worth." }
+    ],
+    "prep_options": ["food", "health", "savings"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "noble_lady", "none"]
+  },
+  {
+    "year": 9, "age": 24,
+    "title": "Promotion Consideration",
+    "milestone": true,
+    "story": "The head eunuch announces that one maid from the embroidery workshop will be elevated to a handmaiden position serving a senior concubine. Your name is among those considered.",
+    "choices": [
+      { "label": "Campaign openly for the position", "consequences": { "compassion": -1, "suspicion": 2, "money": -10, "health": 0, "beauty": 1 }, "result": "You get the position, but rivals are watching you more closely now." },
+      { "label": "Let your record speak for itself", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "You are passed over this time. There will be other chances." },
+      { "label": "Recommend a colleague instead", "consequences": { "compassion": 2, "suspicion": -1, "money": 0, "health": 0, "beauty": 0 }, "result": "Your selflessness is quietly noted by those who matter." }
+    ],
+    "prep_options": ["food", "health", "beauty", "palace_maintenance", "savings"],
+    "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
+  },
+  {
+    "year": 10, "age": 25,
+    "title": "The Midnight Fire",
+    "milestone": false,
+    "story": "A fire breaks out in the western storage wing. In the chaos, you spot a chance to retrieve something valuable — or help others escape safely.",
+    "choices": [
+      { "label": "Help evacuate the other servants first", "consequences": { "compassion": 2, "suspicion": -1, "money": 0, "health": -1, "beauty": 0 }, "result": "Three maids owe you their lives. Word spreads of your bravery." },
+      { "label": "Grab the valuables and slip away", "consequences": { "compassion": -2, "suspicion": 1, "money": 30, "health": 0, "beauty": 0 }, "result": "You profit in the chaos, but someone saw you." },
+      { "label": "Do your duty — report the fire and wait for orders", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "You follow protocol. Nothing gained, nothing lost." }
+    ],
+    "prep_options": ["food", "health", "savings", "charity"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 11, "age": 26,
+    "title": "Placeholder Event — Year 11",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 26.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 1, "money": -10, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 0, "money": 10, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "beauty", "savings"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 12, "age": 27,
+    "title": "Placeholder Event — Year 12",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 27.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 0, "suspicion": -1, "money": 0, "health": 1, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 1 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 1, "money": -5, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "savings", "charity"],
+    "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
+  },
+  {
+    "year": 13, "age": 28,
+    "title": "Placeholder Event — Year 13",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 28.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 1, "money": -10, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 0, "money": 10, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "beauty", "savings"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 14, "age": 29,
+    "title": "Placeholder Event — Year 14",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 29.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 0, "suspicion": 0, "money": 15, "health": 0, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": -1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": -1, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "savings"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 15, "age": 30,
+    "title": "Milestone — Year 15",
+    "milestone": true,
+    "story": "[Placeholder — major milestone at age 30. Replace with Yanxi Palace arc narrative.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 1 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 2, "money": 20, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": 2, "suspicion": -1, "money": -20, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "beauty", "palace_maintenance", "savings", "charity"],
+    "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
+  },
+  {
+    "year": 16, "age": 31,
+    "title": "Placeholder Event — Year 16",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 31.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": -10, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "savings"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 17, "age": 32,
+    "title": "Placeholder Event — Year 17",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 32.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": -1, "money": 10, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "beauty", "savings"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 18, "age": 33,
+    "title": "Placeholder Event — Year 18",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 33.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": 0, "beauty": 1 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 1, "money": -15, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "savings", "charity"],
+    "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
+  },
+  {
+    "year": 19, "age": 34,
+    "title": "Placeholder Event — Year 19",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 34.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 1, "money": -10, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 0, "money": 10, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "beauty", "savings"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 20, "age": 35,
+    "title": "Milestone — Year 20",
+    "milestone": true,
+    "story": "[Placeholder — major milestone at age 35. Replace with Yanxi Palace arc narrative.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 2, "suspicion": -1, "money": -20, "health": 0, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 2, "money": 20, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "beauty", "palace_maintenance", "savings", "charity"],
+    "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
+  },
+  {
+    "year": 21, "age": 36,
+    "title": "Placeholder Event — Year 21",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 36.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 0, "suspicion": -1, "money": 0, "health": 0, "beauty": 1 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 1, "money": -5, "health": -1, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "savings"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 22, "age": 37,
+    "title": "Placeholder Event — Year 22",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 37.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 0, "money": 15, "health": -1, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "beauty", "savings"],
+    "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
+  },
+  {
+    "year": 23, "age": 38,
+    "title": "Placeholder Event — Year 23",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 38.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": -1, "money": -10, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 1, "money": 10, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "savings", "charity"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 24, "age": 39,
+    "title": "Placeholder Event — Year 24",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 39.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": 0, "beauty": 1 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 2, "money": 20, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "beauty", "savings"],
+    "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
+  },
+  {
+    "year": 25, "age": 40,
+    "title": "Milestone — Year 25",
+    "milestone": true,
+    "story": "[Placeholder — major milestone at age 40. Replace with Yanxi Palace arc narrative.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 2, "suspicion": 0, "money": -15, "health": 0, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": -2, "money": 0, "health": 1, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": 1, "suspicion": 1, "money": 10, "health": 0, "beauty": 1 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "beauty", "palace_maintenance", "savings", "charity"],
+    "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
+  },
+  {
+    "year": 26, "age": 41,
+    "title": "Placeholder Event — Year 26",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 41.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": -1, "money": 10, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "savings"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 27, "age": 42,
+    "title": "Placeholder Event — Year 27",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 42.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": -10, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "beauty", "savings"],
+    "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
+  },
+  {
+    "year": 28, "age": 43,
+    "title": "Placeholder Event — Year 28",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 43.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 1, "suspicion": -1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 0, "money": 15, "health": -1, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "savings", "charity"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 29, "age": 44,
+    "title": "Placeholder Event — Year 29",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 44.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": 0, "beauty": 1 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 2, "money": 25, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "beauty", "savings"],
+    "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
+  },
+  {
+    "year": 30, "age": 45,
+    "title": "Milestone — Year 30",
+    "milestone": true,
+    "story": "[Placeholder — major milestone at age 45. Replace with Yanxi Palace arc narrative.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 2, "suspicion": -1, "money": -10, "health": 0, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 1, "money": 20, "health": 0, "beauty": 1 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "beauty", "palace_maintenance", "savings", "charity"],
+    "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
+  },
+  {
+    "year": 31, "age": 46,
+    "title": "Placeholder Event — Year 31",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 46.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": -1, "money": 10, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "savings"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 32, "age": 47,
+    "title": "Placeholder Event — Year 32",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 47.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": -10, "health": 0, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "beauty", "savings"],
+    "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
+  },
+  {
+    "year": 33, "age": 48,
+    "title": "Placeholder Event — Year 33",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 48.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 1, "suspicion": -1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 0, "money": 15, "health": -1, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "savings", "charity"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  {
+    "year": 34, "age": 49,
+    "title": "Placeholder Event — Year 34",
+    "milestone": false,
+    "story": "[Placeholder — replace with narrative content for age 49.]",
+    "choices": [
+      { "label": "Choice A", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": 0, "beauty": 1 }, "result": "Result A." },
+      { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result B." },
+      { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 2, "money": 25, "health": 0, "beauty": 0 }, "result": "Result C." }
+    ],
+    "prep_options": ["food", "health", "beauty", "savings"],
+    "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
+  },
+  {
+    "year": 35, "age": 50,
+    "title": "The Final Year",
+    "milestone": true,
+    "story": "You have survived thirty-five years inside these walls, entering as a girl of sixteen and now standing at fifty. One final event will shape how your story ends. The palace has changed. You have changed. Whatever you choose now, it will echo into whatever years remain.",
+    "choices": [
+      { "label": "Confess all you have witnessed to the Emperor", "consequences": { "compassion": 2, "suspicion": 3, "money": 0, "health": 0, "beauty": 0 }, "result": "You speak the truth. What happens next depends on what you have built." },
+      { "label": "Retire quietly and ask for nothing", "consequences": { "compassion": 1, "suspicion": -2, "money": 0, "health": 0, "beauty": 0 }, "result": "You disappear gracefully. The palace barely notices." },
+      { "label": "Use everything you know to protect someone you love", "consequences": { "compassion": 3, "suspicion": 1, "money": -30, "health": 0, "beauty": 0 }, "result": "You spend yourself completely for another. It is enough." }
+    ],
+    "prep_options": ["food", "health", "beauty", "palace_maintenance", "savings", "charity"],
+    "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
+  }
+]

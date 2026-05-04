@@ -1,0 +1,29 @@
+Year 1: Yingluo enters the Forbidden Palace
+
+It is the Qing Dynasty, the year of 1741. Your name is Wei Yingluo, 
+a 16-year-old girl with a sharp mind and nimble hands. 
+You have entered the Forbidden Palace to find your sister's murderer. 
+They can be anyone, from a fellow embroidery maid to the
+emperor himself. Your objective is to:
+- Survive the palace
+- Find your sister's murderer
+- Avenge her and possible allies made along the way
+
+In order to survive, you must monitor your attributes
+at the start of every year or event. 
+
+Your attributes include:
+- Status (Your current position i.e. embroidery maid)
+- Money (Currency you can invest to your attributes and for certain
+choices within the story)
+- Food (The lower this attribute is, the more likely you will 
+randomly pass from a disease)
+- Health (The lower this attribute is, the more likely you will 
+randomly pass from a disease)
+- Beauty (This attribute may affect your story)
+- Compassion (This attribute may affect your story)
+- Suspicion (How much suspicion people around you 
+currently hold. The more suspicious you are, the more 
+likely you will be found guilty in any conflict)
+
+

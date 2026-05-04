@@ -1,0 +1,40 @@
+{
+  "senior_eunuch": {
+    "id": "senior_eunuch",
+    "name": "Senior Eunuch Li",
+    "role": "Head Chamberlain",
+    "desc": "Grants +10 coins and early warning of suspicion checks.",
+    "passive_bonus": {
+      "money": 10
+    },
+    "scandal_shield": false
+  },
+  "fellow_maid": {
+    "id": "fellow_palace_maid",
+    "name": "Ming Yue",
+    "role": "Embroidery Workshop",
+    "desc": "Boosts compassion and shields you from one scandal per year.",
+    "passive_bonus": {
+      "compassion": 1
+    },
+    "scandal_shield": true
+  },
+  "noble_lady": {
+    "id": "noble_consort",
+    "name": "Consort Chu",
+    "role": "Senior Concubine",
+    "desc": "Ally of the Empress.",
+    "passive_bonus": {
+      "suspicion": -1
+    },
+    "scandal_shield": false
+  },
+  "none": {
+    "id": "none",
+    "name": "No Alliance",
+    "role": "Lone Wolf",
+    "desc": "You trust no one. Conserve energy and suspicion stays flat.",
+    "passive_bonus": {},
+    "scandal_shield": false
+  }
+}
