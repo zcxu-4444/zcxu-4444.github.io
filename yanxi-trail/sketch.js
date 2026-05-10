@@ -353,13 +353,6 @@ class Backgrounds {
   static palace() {
     push();
     background('#8da4a1');
-    noStroke();
-    for (let px of [width * 0.1, width * 0.9]) {
-      for (let a = 10; a >= 2; a -= 2) {
-        fill(141, 28, 28, a * 3);
-        rect(px - 18 + (10 - a), 0, 36 - (10 - a) * 2, height);
-      }
-    }
     pop();
   }
 }
@@ -423,13 +416,13 @@ class NarrativeScene {
         { text: '' },
         { text: 'At the start of every year, monitor these carefully:', size: 17, color: 'muted' },
         { text: '' },
-        { text: 'Status      —  Your current rank in the palace', size: 17 },
-        { text: 'Money      —  Coins to invest in yourself and your choices', size: 17 },
-        { text: 'Food         —  Too low, and illness finds you first', size: 17 },
-        { text: 'Health       —  Too low, and you may not survive the season', size: 17 },
-        { text: 'Beauty      —  Shapes how others see and treat you', size: 17 },
-        { text: 'Compassion  —  May open doors others cannot', size: 17 },
-        { text: 'Suspicion   —  The higher it rises, the more danger you are in', size: 17 },
+        { text: 'Status — Your current rank in the palace', size: 17 },
+        { text: 'Money — Coins to invest in yourself and your choices', size: 17 },
+        { text: 'Food — Too low, and illness finds you first', size: 17 },
+        { text: 'Health — Too low, and you may not survive the season', size: 17 },
+        { text: 'Beauty — Shapes how others see and treat you', size: 17 },
+        { text: 'Compassion — May open doors others cannot', size: 17 },
+        { text: 'Suspicion — The higher it rises, the more danger you are in', size: 17 },
         { text: '' },
         { text: 'When certain attributes fall to zero — you will die.', size: 17, color: 'muted', style: 'italic' },
         { text: 'Which ones? That is for you to discover.', size: 17, color: 'muted', style: 'italic' },
@@ -441,6 +434,8 @@ class NarrativeScene {
     this.deep      = 0;          // how far down the snow pile sits (starts at full = no pile)
     this.wiping    = false;      // is a wipe transition in progress?
     this.bgAlpha   = 0;         // fade-in for page text
+    this.snowAlpha = 255;
+    this.fading    = false;
   }
 
   onEnter() {
@@ -449,6 +444,8 @@ class NarrativeScene {
     this.bgAlpha = 0;
     this._buildSnow();
     this.deep = height; // pile starts off-screen (no pile yet)
+    this.snowAlpha = 255;
+    this.fading    = false;
     playTrack(yinmantrack);
   }
 
@@ -518,18 +515,10 @@ class NarrativeScene {
       // rising snow pile (white rect from bottom)
       fill(255);
       rect(0, this.deep, width, height - this.deep);
-      this.deep -= 2.5;
+      this.deep -= 12;
 
       if (this.deep <= 0) {
-        // wipe complete — advance or start game
-        this.wiping  = false;
-        this.bgAlpha = 0;
-        this.pageIdx++;
-        this.deep = height;        // hide pile for new page
-        this._buildSnow();
-        if (this.pageIdx >= this.pages.length) {
-          advanceYear();           // done with intro, start game
-        }
+        this.fading = true;      // pile is full, start fading
       }
       pop();
     }
