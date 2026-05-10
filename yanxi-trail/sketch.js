@@ -85,6 +85,7 @@ function setup() {
   textFont('Newsreader');
 
   scenes.intro = new IntroScene();
+  scenes.narrative = new NarrativeScene();
   scenes.prep = new PrepScene();
   scenes.ally = new AllyScene();
   scenes.event = new EventScene();
@@ -387,7 +388,160 @@ class IntroScene {
     }
   }
 
-  keyPressed(k, kc) { if (k === ' ' || kc === 32) advanceYear(); }
+  keyPressed(k, kc) { if (k === ' ' || kc === 32) switchScene('narrative'); }
+}
+
+// ---- NarrativeScene
+
+// ---- NarrativeScene — multi-page intro with snow wipe transition
+class NarrativeScene {
+  constructor() {
+    this.pages = [
+      // Page 1: the setup
+      [
+        { text: 'Year 1: Yingluo Enters the Forbidden Palace', size: 26, style: 'bold', color: 'gold' },
+        { text: '' },
+        { text: 'It is the Qing Dynasty, the year of 1741.', size: 19 },
+        { text: 'Your name is Wei Yingluo, a 16-year-old girl', size: 19 },
+        { text: 'with a sharp mind and nimble hands.', size: 19 },
+        { text: '' },
+        { text: 'You have entered the Forbidden Palace to find', size: 19 },
+        { text: "your sister's murderer. They can be anyone...", size: 19 },
+        { text: 'from a fellow embroidery maid to the Emperor himself.', size: 19 },
+      ],
+      // Page 2: objectives
+      [
+        { text: 'Your objectives:', size: 22, style: 'bold', color: 'gold' },
+        { text: '' },
+        { text: '✦  Survive the palace', size: 19 },
+        { text: "✦  Find your sister's murderer", size: 19 },
+        { text: '✦  Avenge her, and the allies you may make along the way', size: 19 },
+      ],
+      // Page 3: attributes explanation
+      [
+        { text: 'Your Attributes', size: 22, style: 'bold', color: 'gold' },
+        { text: '' },
+        { text: 'At the start of every year, monitor these carefully:', size: 17, color: 'muted' },
+        { text: '' },
+        { text: 'Status      —  Your current rank in the palace', size: 17 },
+        { text: 'Money      —  Coins to invest in yourself and your choices', size: 17 },
+        { text: 'Food         —  Too low, and illness finds you first', size: 17 },
+        { text: 'Health       —  Too low, and you may not survive the season', size: 17 },
+        { text: 'Beauty      —  Shapes how others see and treat you', size: 17 },
+        { text: 'Compassion  —  May open doors others cannot', size: 17 },
+        { text: 'Suspicion   —  The higher it rises, the more danger you are in', size: 17 },
+        { text: '' },
+        { text: 'When certain attributes fall to zero — you will die.', size: 17, color: 'muted', style: 'italic' },
+        { text: 'Which ones? That is for you to discover.', size: 17, color: 'muted', style: 'italic' },
+      ],
+    ];
+
+    this.pageIdx   = 0;
+    this.snowflakes = [];
+    this.deep      = 0;          // how far down the snow pile sits (starts at full = no pile)
+    this.wiping    = false;      // is a wipe transition in progress?
+    this.bgAlpha   = 0;         // fade-in for page text
+  }
+
+  onEnter() {
+    this.pageIdx = 0;
+    this.wiping  = false;
+    this.bgAlpha = 0;
+    this._buildSnow();
+    this.deep = height; // pile starts off-screen (no pile yet)
+    playTrack(yinmantrack);
+  }
+
+  _buildSnow() {
+    this.snowflakes = [];
+    for (let i = 0; i < 160; i++) {
+      this.snowflakes.push({
+        x:     random(width),
+        y:     random(height),
+        speed: random(1, 3),
+      });
+    }
+  }
+
+  _nextPage() {
+    if (this.wiping) return;      // already animating
+    this.wiping = true;
+    this.deep   = height;         // reset pile to bottom so it rises fresh
+    this._buildSnow();
+  }
+
+  draw() {
+    // Background
+    Backgrounds.palace();
+
+    // Fade in page text
+    if (!this.wiping && this.bgAlpha < 255) this.bgAlpha = min(255, this.bgAlpha + 4);
+
+    // --- draw page text ---
+    push();
+    drawingContext.globalAlpha = this.bgAlpha / 255;
+    textFont('Newsreader');
+
+    const page  = this.pages[this.pageIdx];
+    const cx    = width / 2;
+    const totalH = page.length * 26;
+    let ty = (height - totalH) / 2 - 20;
+
+    for (let line of page) {
+      const sz    = line.size  || 19;
+      const style = line.style || 'normal';
+      const col   = line.color === 'gold'  ? palette.gold
+                  : line.color === 'muted' ? palette.muted
+                  : palette.cream;
+
+      textSize(sz);
+      textStyle(style === 'bold' ? BOLD : style === 'italic' ? ITALIC : NORMAL);
+      fill(col); noStroke(); textAlign(CENTER, TOP);
+      text(line.text || '', cx, ty);
+      ty += sz + 10;
+    }
+
+    textStyle(NORMAL);
+    drawingContext.globalAlpha = 1;
+    pop();
+
+    // --- snow + wipe ---
+    if (this.wiping) {
+      // falling flakes
+      push();
+      fill(255); noStroke();
+      for (let s of this.snowflakes) {
+        circle(s.x, s.y, 4);
+        s.y += s.speed;
+        if (s.y > this.deep) { s.y = 0; s.x = random(width); }
+      }
+      // rising snow pile (white rect from bottom)
+      fill(255);
+      rect(0, this.deep, width, height - this.deep);
+      this.deep -= 2.5;
+
+      if (this.deep <= 0) {
+        // wipe complete — advance or start game
+        this.wiping  = false;
+        this.bgAlpha = 0;
+        this.pageIdx++;
+        this.deep = height;        // hide pile for new page
+        this._buildSnow();
+        if (this.pageIdx >= this.pages.length) {
+          advanceYear();           // done with intro, start game
+        }
+      }
+      pop();
+    }
+
+    // hint text
+    const isLast = this.pageIdx === this.pages.length - 1;
+    drawHint(isLast ? 'Press Space to begin your journey' : 'Press Space to continue');
+  }
+
+  keyPressed(k, kc) {
+    if (k === ' ' || kc === 32) this._nextPage();
+  }
 }
 
 // ---- PrepScene 

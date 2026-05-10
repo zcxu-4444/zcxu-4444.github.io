@@ -26,4 +26,4 @@ randomly pass from a disease)
 currently hold. The more suspicious you are, the more 
 likely you will be found guilty in any conflict)
 
-
+When certain attribute numbers go below zero, you will die. As to which ones, it's up to you to figure out on your own!
