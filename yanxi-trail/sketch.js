@@ -523,6 +523,29 @@ class NarrativeScene {
       pop();
     }
 
+    if (this.fading) {
+      // draw the full white cover, fading out
+      this.snowAlpha = max(0, this.snowAlpha - 6);
+      push();
+      fill(255, 255, 255, this.snowAlpha);
+      rect(0, 0, width, height);
+      pop();
+
+      if (this.snowAlpha <= 0) {
+        // fade done — flip page
+        this.fading  = false;
+        this.wiping  = false;
+        this.bgAlpha = 0;
+        this.snowAlpha = 255;
+        this.deep    = height;
+        this._buildSnow();
+        this.pageIdx++;
+        if (this.pageIdx >= this.pages.length) {
+          advanceYear();
+        }
+      }
+    }
+
     // hint text
     const isLast = this.pageIdx === this.pages.length - 1;
     drawHint(isLast ? 'Press Space to begin your journey' : 'Press Space to continue');
