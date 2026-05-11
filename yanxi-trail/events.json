@@ -145,7 +145,7 @@
   },
   {
     "year": 12, "age": 27,
-    "title": "Placeholder Event — Year 12",
+    "title": "The Seduction Attempt",
     "milestone": false,
     "story": "As you were out on an errand, a flock of maids surround a very handsome guard. Turns out it is Fucha Fuheng. Your co-worker attempts to seduce him. What do you do?",
     "choices": [
@@ -186,11 +186,11 @@
     "year": 15, "age": 30,
     "title": "Milestone — Year 15",
     "milestone": true,
-    "story": "You were kicked out of Changchun Palace",
+    "story": "You were kicked out of Changchun Palace, but you want to take this opportunity to find Prince He's mother, your sister's murderer. In a howling thunderstorm, you arrive at her Palace of Earthly Tranquility, what do you do to avenge your sister?",
     "choices": [
-      { "label": "Choice A", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 1 }, "result": "Result A." },
-      { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 2, "money": 20, "health": 0, "beauty": 0 }, "result": "Result B." },
-      { "label": "Choice C", "consequences": { "compassion": 2, "suspicion": -1, "money": -20, "health": 0, "beauty": 0 }, "result": "Result C." }
+      { "label": "Run into the palace without permission and demand answers as to why Prince He's mother killed your sister", "consequences": {}, "result": "She comes out with a scowl, answering your question, claiming that your sister attempted to seduce her son, Prince He and she had to be dealt with. She then waved her hand as you were sent down to the dungeons on the crime of insubordination. You die in the cells." },
+      { "label": "Request an audience and offer her tea that has been spiked with cyanide from rat poison", "consequences": {}, "result": "You were immediately caught as her servants detected the poison in the tea. You are executed for attempted assassination." },
+      { "label": "Overcome with grief, you break down in tears in front of her palace gates, screaming to the thunder gods to punish her for her crimes", "consequences": { "compassion": 2, "suspicion": -1, "money": -20, "health": 0, "beauty": 0 }, "result": "Prince He's mother comes out in a fury, but as the bolt of lighting struck her palace gate canopy, she gets electrocuted and dies. You have avenged your sister." }
     ],
     "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
