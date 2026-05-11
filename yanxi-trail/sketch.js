@@ -331,8 +331,9 @@ class StatPanel {
 
 // --- NPC stuff
 class NPCCard {
-  constructor(ally, x, y, w, h, num) {
+  constructor(ally, x, y, w, h, num, key) {
     this.ally = ally;
+    this.key  = key;   // the alliesData JSON key e.g. "senior_eunuch"
     this.x = x; this.y = y; this.w = w; this.h = h;
     this.num = num;
     this.selected = false;
@@ -682,8 +683,8 @@ class AllyScene {
     pool.forEach((id, i) => {
       const ally = alliesData[id];
       if (!ally) return;
-      const card = new NPCCard(ally, sx, sy, cw, ch, i + 1);
-      if (gs.ally && ally.id === gs.ally) { card.selected = true; this.selectedIdx = i; }
+      const card = new NPCCard(ally, sx, sy, cw, ch, i + 1, id);
+      if (gs.ally && id === gs.ally) { card.selected = true; this.selectedIdx = i; }
       this.cards.push(card);
       sx += cw + gap;
     });
@@ -714,7 +715,7 @@ class AllyScene {
     const n = parseInt(k);
     if (!isNaN(n) && n >= 1 && n <= this.cards.length) { this._select(n - 1); return; }
     if ((k === ' ' || kc === 13) && this.selectedIdx >= 0) {
-      gs.ally = this.cards[this.selectedIdx].ally.id;
+      gs.ally = this.cards[this.selectedIdx].key;
       switchScene('event');
     }
   }
@@ -893,6 +894,7 @@ class EndScene {
 
   draw() {
     const img = this._img();
+    if (!img) { background(0); return; }
     background(0);
     if (this.alpha < 255) this.alpha = min(255, this.alpha + 3);
     push();
