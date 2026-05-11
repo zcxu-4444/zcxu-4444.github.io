@@ -41,7 +41,7 @@
   },
   {
     "year": 4, "age": 19,
-    "title": "A Noble Lady's Favor",
+    "title": "A Empress's Birthday Gift",
     "milestone": false,
     "story": "A high-ranking noble lady visits the embroidery workshop and takes notice of your work. She invites you to embroider a personal gift for the Emperor.",
     "choices": [
@@ -60,10 +60,10 @@
     "choices": [
       { "label": "Meet his gaze and bow deeply", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": 0, "beauty": 1 }, "result": "He says nothing, but a senior concubine saw everything." },
       { "label": "Keep your eyes down as protocol demands", "consequences": { "compassion": 0, "suspicion": -1, "money": 0, "health": 0, "beauty": 0 }, "result": "You are invisible. Safe, for now." },
-      { "label": "Offer him a small embroidered token you made", "consequences": { "compassion": 1, "suspicion": 2, "money": -5, "health": 0, "beauty": 1 }, "result": "He accepts it, amused. Every concubine in the hall now knows your face." }
+      { "label": "Offer him a small glass of wine you made", "consequences": { "compassion": 1, "suspicion": 2, "money": 0, "health": 0, "beauty": 1 }, "result": "He accepts it, but he is annoyed that you offered when he didn't even ask. " }
     ],
     "prep_options": ["food", "health", "beauty", "charity"],
-    "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
+    "alliance_pool": ["senior_eunuch", "none"]
   },
   {
     "year": 6, "age": 21,
@@ -76,7 +76,7 @@
       { "label": "Ask your alliance partner for herbal remedies", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "They help you quietly. Your bond deepens." }
     ],
     "prep_options": ["food", "health", "beauty", "charity"],
-    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+    "alliance_pool": ["senior_eunuch", "none"]
   },
   {
     "year": 7, "age": 22,
@@ -89,7 +89,7 @@
       { "label": "Donate nothing and keep your savings", "consequences": { "compassion": -1, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Others notice your absence from the list." }
     ],
     "prep_options": ["food", "health", "beauty", "charity"],
-    "alliance_pool": ["noble_lady", "senior_eunuch", "none"]
+    "alliance_pool": ["senior_eunuch", "none"]
   },
   {
     "year": 8, "age": 23,
@@ -102,7 +102,7 @@
       { "label": "Use your alliance to find the forger", "consequences": { "compassion": 1, "suspicion": 0, "money": -10, "health": 0, "beauty": 0 }, "result": "The real culprit is exposed. Your alliance proves its worth." }
     ],
     "prep_options": ["food", "health", "beauty", "charity"],
-    "alliance_pool": ["senior_eunuch", "fellow_maid", "noble_lady", "none"]
+    "alliance_pool": ["senior_eunuch", "none"]
   },
   {
     "year": 9, "age": 24,
@@ -115,7 +115,7 @@
       { "label": "Recommend a colleague instead", "consequences": { "compassion": 2, "suspicion": -1, "money": 0, "health": 0, "beauty": 0 }, "result": "Your selflessness is quietly noted by those who matter." }
     ],
     "prep_options": ["food", "health", "beauty", "charity"],
-    "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
+    "alliance_pool": ["senior_eunuch", "none"]
   },
   {
     "year": 10, "age": 25,
