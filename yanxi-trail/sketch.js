@@ -24,6 +24,7 @@ let gs = {
   prepAllocations: {},
   yearStartMoney: 0,
   deathType: null,
+  pendingDeathAfterResult: false,
 };
 
 // ---- scene stuff
@@ -138,7 +139,7 @@ function applyConsequences(cons) {
 }
 
 function applyAllyPassive() {
-  if (!gs.ally || gs.ally === 'none') return;
+  if (!gs.ally) return;
   const ally = alliesData[gs.ally];
   if (!ally) return;
   applyConsequences(ally.passive_bonus || {});
@@ -160,7 +161,7 @@ function resetGS() {
     phase: 'intro',
     pendingConsequences: null, resultText: '',
     chosenChoice: -1, prepAllocations: {},
-    yearStartMoney: 0, deathType: null,
+    yearStartMoney: 0, deathType: null, pendingDeathAfterResult: false,
   };
 }
 
@@ -192,7 +193,8 @@ function selectChoice(i) {
   // Check for instant condemned death before applying consequences
   if (choice.death_type) {
     gs.deathType = choice.death_type;
-    switchScene('death');
+    gs.pendingDeathAfterResult = true;
+    switchScene('result');
     return;
   }
 
@@ -321,10 +323,8 @@ class StatPanel {
     statY += 4;
     goldDivider(this.x + 10, statY, this.w - 20);
     statY += 14;
-    fill(palette.gold); textSize(13); textAlign(LEFT, TOP);
-    text('Coins: ' + gs.money, this.x + 12, statY);
-    fill(palette.muted); textAlign(RIGHT, TOP);
-    text(gs.status, this.x + this.w - 12, statY);
+    fill(palette.gold); textSize(13); textAlign(CENTER, TOP);
+    text(gs.status, this.x + this.w / 2, statY);
     pop();
   }
 }
@@ -462,17 +462,19 @@ class NarrativeScene {
 
     this.pageIdx   = 0;
     this.snowflakes = [];
-    this.deep      = 0;          // how far down the snow pile sits (starts at full = no pile)
-    this.wiping    = false;      // is a wipe transition in progress?
-    this.bgAlpha   = 0;         // fade-in for page text
+    this.deep      = 0;
+    this.wiping    = false;
+    this.bgAlpha   = 0;
     this.snowAlpha = 255;
     this.fading    = false;
+    this.pageFlipped = false;
   }
 
   onEnter() {
     this.pageIdx = 0;
     this.wiping  = false;
     this.bgAlpha = 0;
+    this.pageFlipped = false;
     this._buildSnow();
     this.deep = height; // pile starts off-screen (no pile yet)
     this.snowAlpha = 255;
@@ -555,25 +557,33 @@ class NarrativeScene {
     }
 
     if (this.fading) {
-      // draw the full white cover, fading out
-      this.snowAlpha = max(0, this.snowAlpha - 6);
+      // Flip the page as soon as white covers the screen (before fading out)
+      if (!this.pageFlipped) {
+        this.pageFlipped = true;
+        this.pageIdx++;
+        if (this.pageIdx >= this.pages.length) {
+          gs.prepAllocations   = {};
+          gs.scandalShieldUsed = false;
+          switchScene('prep');
+          return;
+        }
+        this.bgAlpha = 255; // new page text visible underneath white
+      }
+
+      // fade white out to reveal new page
+      this.snowAlpha = max(0, this.snowAlpha - 4);
       push();
       fill(255, 255, 255, this.snowAlpha);
       rect(0, 0, width, height);
       pop();
 
       if (this.snowAlpha <= 0) {
-        // fade done — flip page
-        this.fading  = false;
-        this.wiping  = false;
-        this.bgAlpha = 0;
-        this.snowAlpha = 255;
-        this.deep    = height;
+        this.fading      = false;
+        this.wiping      = false;
+        this.pageFlipped = false;
+        this.snowAlpha   = 255;
+        this.deep        = height;
         this._buildSnow();
-        this.pageIdx++;
-        if (this.pageIdx >= this.pages.length) {
-          advanceYear();
-        }
       }
     }
 
@@ -811,7 +821,14 @@ class ResultScene {
     drawHint('Click anywhere to continue to the next year');
   }
 
-  mousePressed() { advanceYear(); }
+  mousePressed() {
+    if (gs.pendingDeathAfterResult) {
+      gs.pendingDeathAfterResult = false;
+      switchScene('death');
+    } else {
+      advanceYear();
+    }
+  }
 }
 
 // ---- DeathScene 
@@ -854,29 +871,6 @@ class DeathScene {
       image(img, dx, dy, dw, dh);
       drawingContext.globalAlpha = 1;
       pop();
-    } else {
-      // Natural death — original text screen
-      background(0);
-      if (this.alpha < 220) this.alpha = min(220, this.alpha + 1.5);
-      push();
-      drawingContext.globalAlpha = this.alpha / 255;
-      textFont('Newsreader');
-
-      fill(palette.red); noStroke(); textAlign(CENTER, CENTER); textSize(36);
-      text('薨逝', width / 2, height / 2 - 90);
-
-      fill(palette.cream); textSize(19);
-      const lines = wrapText(gs.resultText, min(520, width - 120));
-      let ty = height / 2 - 48;
-      for (let l of lines) { text(l, width / 2, ty); ty += 24; }
-
-      fill(palette.muted); textSize(15); ty += 10;
-      text('Year ' + (gs.year + 1) + '  ·  Age ' + eventsData[gs.year].age, width / 2, ty);
-
-      drawingContext.globalAlpha = 1;
-      pop();
-
-      drawHint('Press Enter to begin again');
     }
   }
 
