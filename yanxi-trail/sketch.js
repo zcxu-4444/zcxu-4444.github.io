@@ -485,7 +485,7 @@ class NarrativeScene {
 
   _buildSnow() {
     this.snowflakes = [];
-    for (let i = 0; i < 160; i++) {
+    for (let i = 0; i < 400; i++) {
       this.snowflakes.push({
         x:     random(width),
         y:     random(height),
@@ -549,7 +549,7 @@ class NarrativeScene {
       // rising snow pile (white rect from bottom)
       fill(255);
       rect(0, this.deep, width, height - this.deep);
-      this.deep -= 12;
+      this.deep -= 8;
 
       if (this.deep <= 0) {
         this.fading = true;      // pile is full, start fading
