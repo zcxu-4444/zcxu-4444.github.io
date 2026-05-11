@@ -63,6 +63,9 @@ let okEndingImg    = null;
 let shiqutrack   = null;   // all other scenes
 let shouxingtrack = null;  // milestones
 let yinmantrack  = null;   // prep phase
+let zishatrack   = null;   // death scenes
+let snowtrack1   = null;   // ok ending
+let snowtrack2   = null;   // best ending
 let currentTrack = null;
 
 function playTrack(track) {
@@ -93,6 +96,10 @@ function preload() {
   shiqutrack = loadSound('shiqu.mp3');
   shouxingtrack = loadSound('shouxing.mp3');
   yinmantrack = loadSound('yinman.mp3');
+  zishatrack = loadSound('zisha.mp3');
+  snowtrack1 = loadSound("xlxdsy.mp3")
+  snowtrack2 = loadSound("xlxdsy2.mp3")
+
 }
 
 function setup() {
@@ -167,7 +174,7 @@ function resetGS() {
 
 function advanceYear() {
   gs.year++;
-  if (gs.year >= eventsData.length) { switchScene('end'); return; }
+  if (gs.year >= Object.keys(eventsData).length) { switchScene('end'); return; }
   gs.prepAllocations   = {};
   gs.scandalShieldUsed = false;
 
@@ -820,7 +827,7 @@ class ResultScene {
     drawingContext.globalAlpha = 1;
     pop();
 
-    const isLastYear = gs.year >= eventsData.length - 1;
+    const isLastYear = gs.year >= Object.keys(eventsData).length - 1;
     drawHint(isLastYear ? 'Click anywhere to see your ending' : 'Click anywhere to continue to the next year');
   }
 
@@ -839,7 +846,7 @@ class DeathScene {
   constructor() { this.alpha = 0; }
   onEnter() {
     this.alpha = 0;
-    stopMusic();
+    playTrack(zishatrack)
   }
 
   _img() {
@@ -894,7 +901,18 @@ class EndScene {
     return okEndingImg;
   }
 
-  onEnter() { this.alpha = 0; stopMusic(); }
+  onEnter() { 
+    this.alpha = 0;
+    if (gs.suspicion >= 8){
+      playTrack(zishatrack);
+    }
+    else if (gs.compassion >= 15){
+      playTrack(xlxdsy2track);
+    }
+    else{
+      playTrack(xlxdsytrack);
+    }
+  }
 
   draw() {
     const img = this._img();

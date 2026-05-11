@@ -10,7 +10,7 @@
       { "label": "Report the whisper to the head maid", "consequences": { "compassion": -1, "suspicion": 1, "money": 5, "health": 0, "beauty": 0 }, "result": "The head maid rewards you with a small coin, but the other maids notice." }
     ],
     "prep_options": ["food", "health", "beauty", "charity"],
-    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+    "alliance_pool": ["senior_eunuch", "none"]
   },
   {
     "year": 2, "age": 17,
@@ -23,7 +23,7 @@
       { "label": "Investigate quietly before saying anything", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": 0, "beauty": 1 }, "result": "You find the thief yourself and handle it discreetly. Your reputation grows." }
     ],
     "prep_options": ["food", "health", "beauty", "charity"],
-    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+    "alliance_pool": ["senior_eunuch", "none"]
   },
   
   {
@@ -37,7 +37,7 @@
       { "label": "Admit that you informed a higher-up about the poisoning, but offer to work and conspire with Noble Consort Gao.", "consequences": {}, "result": "She smiles coldly. You have confessed to knowing too much. By nightfall, you are gone.", "death_type": "killed" }
     ],
     "prep_options": ["food", "health", "beauty", "charity"],
-    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+    "alliance_pool": ["senior_eunuch", "none"]
   },
   {
     "year": 4, "age": 19,
@@ -50,7 +50,7 @@
       { "label": "Politely decline, citing your low station", "consequences": { "compassion": 0, "suspicion": -1, "money": 0, "health": 0, "beauty": 0 }, "result": "She respects your modesty. You remain below the radar." }
     ],
     "prep_options": ["food", "health", "beauty", "charity"],
-    "alliance_pool": ["noble_lady", "senior_eunuch", "none"]
+    "alliance_pool": ["senior_eunuch", "none"]
   },
   {
     "year": 5, "age": 20,
@@ -132,13 +132,13 @@
   },
   {
     "year": 11, "age": 26,
-    "title": "Placeholder Event — Year 11",
+    "title": "The Emperors's Brother",
     "milestone": false,
-    "story": "[Placeholder — replace with narrative content for age 26.]",
+    "story": "The empress's brother, Fucha Fuheng, visits Changchun Palace, but you are suspicious of him as he has a pendant that your sister once wore. What do you do when he arrives?",
     "choices": [
-      { "label": "Choice A", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "Result A." },
-      { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 1, "money": -10, "health": 0, "beauty": 0 }, "result": "Result B." },
-      { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 0, "money": 10, "health": 0, "beauty": 0 }, "result": "Result C." }
+      { "label": "Add dishwater to his tea to vent off some anger", "consequences": { "compassion": 0, "suspicion": 1, "money": -10, "health": 0, "beauty": 0 }, "result": "You get caught and are reprimanded for your actions." },
+      { "label": "Ask him if he knows your sister", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "He looks shocked after you mention your sister's name, but he denies not knowing her." },
+      { "label": "Ignore him and focus on your duties", "consequences": { "compassion": 0, "suspicion": 0, "money": 10, "health": 0, "beauty": 0 }, "result": "You serve him and the empress tea, but then he thinks you look a little familar..." }
     ],
     "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
@@ -147,11 +147,11 @@
     "year": 12, "age": 27,
     "title": "Placeholder Event — Year 12",
     "milestone": false,
-    "story": "[Placeholder — replace with narrative content for age 27.]",
+    "story": "As you were out on an errand, a flock of maids surround a very handsome guard. Turns out it is Fucha Fuheng. Your co-worker attempts to seduce him. What do you do?",
     "choices": [
-      { "label": "Choice A", "consequences": { "compassion": 0, "suspicion": -1, "money": 0, "health": 1, "beauty": 0 }, "result": "Result A." },
-      { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 1 }, "result": "Result B." },
-      { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 1, "money": -5, "health": 0, "beauty": 0 }, "result": "Result C." }
+      { "label": "Ignore her", "consequences": { "compassion": -1, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "She pretends to trip in front of him, but he ignores her and walks away. He later finds you and warns you to stop asking information from people in regards to your sister." },
+      { "label": "Stop her and warn her of the consequences of attempting to date in the palace", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 1 }, "result": "She scoffs, annoyed and stomps off. Fucha Fuheng notices your intervention and appreciates your interjection, but warns you to stop asking information from people in regards to your sister." },
+      { "label": "Go a step ahead and seduce him first", "consequences": { "compassion": -1, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Your co-worker gets angry and storms off, whilst Fucha Fuhence is confused by your actions, but it seems like he knows your true intentions. He warns you to stop asking information from people in regards to your sister." }
     ],
     "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
@@ -186,7 +186,7 @@
     "year": 15, "age": 30,
     "title": "Milestone — Year 15",
     "milestone": true,
-    "story": "[Placeholder — major milestone at age 30. Replace with Yanxi Palace arc narrative.]",
+    "story": "You were kicked out of Changchun Palace",
     "choices": [
       { "label": "Choice A", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 1 }, "result": "Result A." },
       { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 2, "money": 20, "health": 0, "beauty": 0 }, "result": "Result B." },
