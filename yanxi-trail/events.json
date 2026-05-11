@@ -9,7 +9,7 @@
       { "label": "Stay quiet and keep walking", "consequences": { "compassion": 0, "suspicion": -1, "money": 0, "health": 0, "beauty": 0 }, "result": "You reveal nothing. A wise first move." },
       { "label": "Report the whisper to the head maid", "consequences": { "compassion": -1, "suspicion": 1, "money": 5, "health": 0, "beauty": 0 }, "result": "The head maid rewards you with a small coin, but the other maids notice." }
     ],
-    "prep_options": ["food", "health", "beauty", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
@@ -22,11 +22,25 @@
       { "label": "Take the blame yourself", "consequences": { "compassion": 1, "suspicion": 0, "money": -10, "health": -1, "beauty": 0 }, "result": "You are fined and made to redo the work. Others are quietly grateful." },
       { "label": "Investigate quietly before saying anything", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": 0, "beauty": 1 }, "result": "You find the thief yourself and handle it discreetly. Your reputation grows." }
     ],
-    "prep_options": ["food", "health", "savings", "charity"],
+    "prep_options": ["food", "health", "beauty", "charity"],
+    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
+  },
+  
+  {
+    "year": 3, "age": 18,
+    "title": "Rumours in the Courtyard",
+    "milestone": false,
+    "story": "Whispers circulate that Noble Consort Gao in the eastern wing poisoned a concubine that is pregnant with the Emperor's child. Your manager pulls you aside, warning you that your name has been mentioned. Next thing you know, you are being questioned by the Noble Consort Gao herself.",
+    "choices": [
+      { "label": "Swear ignorance and that you know nothing about the rumours.", "consequences": {}, "result": "Noble Consort Gao does not believe you, nor does she want to take any chances. She had you dealt with quietly and permanently.", "death_type": "killed" },
+      { "label": "Pretend to be crazy and start talking nonsense.", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": -1, "beauty": 0 }, "result": "You somehow got away with it, you ran Noble Consort Gao's patience thin and she thought you were too mentally insane to be deemed as a threat. She force fed you 10 bowls of lotus balls as punishment." },
+      { "label": "Admit that you informed a higher-up about the poisoning, but offer to work and conspire with Noble Consort Gao.", "consequences": {}, "result": "She smiles coldly. You have confessed to knowing too much. By nightfall, you are gone.", "death_type": "killed" }
+    ],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
-    "year": 3, "age": 18,
+    "year": 4, "age": 19,
     "title": "A Noble Lady's Favor",
     "milestone": false,
     "story": "A high-ranking noble lady visits the embroidery workshop and takes notice of your work. She invites you to embroider a personal gift for the Emperor.",
@@ -35,21 +49,8 @@
       { "label": "Accept humbly and dedicate it to her household", "consequences": { "compassion": 1, "suspicion": 0, "money": 10, "health": 0, "beauty": 1 }, "result": "She is touched. You gain a small but genuine ally." },
       { "label": "Politely decline, citing your low station", "consequences": { "compassion": 0, "suspicion": -1, "money": 0, "health": 0, "beauty": 0 }, "result": "She respects your modesty. You remain below the radar." }
     ],
-    "prep_options": ["food", "health", "beauty", "palace_maintenance"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["noble_lady", "senior_eunuch", "none"]
-  },
-  {
-    "year": 4, "age": 19,
-    "title": "Rumours in the Courtyard",
-    "milestone": false,
-    "story": "Whispers circulate that a concubine in the eastern wing has been poisoning rivals. Your alliance partner pulls you aside — your name has been mentioned.",
-    "choices": [
-      { "label": "Go directly to the head eunuch to clear your name", "consequences": { "compassion": 0, "suspicion": -1, "money": -5, "health": 0, "beauty": 0 }, "result": "The eunuch vouches for you, but the visit costs a bribe." },
-      { "label": "Lay low and wait for the rumour to die", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "The rumour lingers longer than you hoped." },
-      { "label": "Find out who started the rumour", "consequences": { "compassion": -1, "suspicion": 0, "money": 0, "health": -1, "beauty": 0 }, "result": "You uncover the source, but the hunt exhausts you." }
-    ],
-    "prep_options": ["food", "health", "savings", "charity"],
-    "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
     "year": 5, "age": 20,
@@ -61,7 +62,7 @@
       { "label": "Keep your eyes down as protocol demands", "consequences": { "compassion": 0, "suspicion": -1, "money": 0, "health": 0, "beauty": 0 }, "result": "You are invisible. Safe, for now." },
       { "label": "Offer him a small embroidered token you made", "consequences": { "compassion": 1, "suspicion": 2, "money": -5, "health": 0, "beauty": 1 }, "result": "He accepts it, amused. Every concubine in the hall now knows your face." }
     ],
-    "prep_options": ["food", "health", "beauty", "palace_maintenance", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
   },
   {
@@ -74,7 +75,7 @@
       { "label": "Push through and keep working", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": -2, "beauty": -1 }, "result": "You survive, but the illness takes a visible toll." },
       { "label": "Ask your alliance partner for herbal remedies", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "They help you quietly. Your bond deepens." }
     ],
-    "prep_options": ["food", "health", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
@@ -87,7 +88,7 @@
       { "label": "Donate a modest amount (10 copper coins)", "consequences": { "compassion": 1, "suspicion": 0, "money": -10, "health": 0, "beauty": 0 }, "result": "You give what you can. Nothing remarkable happens." },
       { "label": "Donate nothing and keep your savings", "consequences": { "compassion": -1, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Others notice your absence from the list." }
     ],
-    "prep_options": ["food", "health", "beauty", "savings", "charity"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["noble_lady", "senior_eunuch", "none"]
   },
   {
@@ -100,7 +101,7 @@
       { "label": "Apologise publicly even though you are innocent", "consequences": { "compassion": 0, "suspicion": -1, "money": 0, "health": -1, "beauty": -1 }, "result": "The tension eases, but your pride pays the price." },
       { "label": "Use your alliance to find the forger", "consequences": { "compassion": 1, "suspicion": 0, "money": -10, "health": 0, "beauty": 0 }, "result": "The real culprit is exposed. Your alliance proves its worth." }
     ],
-    "prep_options": ["food", "health", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "noble_lady", "none"]
   },
   {
@@ -113,7 +114,7 @@
       { "label": "Let your record speak for itself", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "You are passed over this time. There will be other chances." },
       { "label": "Recommend a colleague instead", "consequences": { "compassion": 2, "suspicion": -1, "money": 0, "health": 0, "beauty": 0 }, "result": "Your selflessness is quietly noted by those who matter." }
     ],
-    "prep_options": ["food", "health", "beauty", "palace_maintenance", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
   },
   {
@@ -126,7 +127,7 @@
       { "label": "Grab the valuables and slip away", "consequences": { "compassion": -2, "suspicion": 1, "money": 30, "health": 0, "beauty": 0 }, "result": "You profit in the chaos, but someone saw you." },
       { "label": "Do your duty — report the fire and wait for orders", "consequences": { "compassion": 0, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "You follow protocol. Nothing gained, nothing lost." }
     ],
-    "prep_options": ["food", "health", "savings", "charity"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
@@ -139,7 +140,7 @@
       { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 1, "money": -10, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 0, "money": 10, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "beauty", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
@@ -152,7 +153,7 @@
       { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 1 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 1, "money": -5, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "savings", "charity"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
   },
   {
@@ -165,7 +166,7 @@
       { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 1, "money": -10, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 0, "money": 10, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "beauty", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
@@ -178,7 +179,7 @@
       { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": -1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": -1, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
@@ -191,7 +192,7 @@
       { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 2, "money": 20, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": 2, "suspicion": -1, "money": -20, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "beauty", "palace_maintenance", "savings", "charity"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
   },
   {
@@ -204,7 +205,7 @@
       { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": -10, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
@@ -217,7 +218,7 @@
       { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": -1, "money": 10, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "beauty", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
@@ -230,7 +231,7 @@
       { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 1, "money": -15, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "savings", "charity"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
   },
   {
@@ -243,7 +244,7 @@
       { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 1, "money": -10, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 0, "money": 10, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "beauty", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
@@ -256,7 +257,7 @@
       { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 2, "money": 20, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "beauty", "palace_maintenance", "savings", "charity"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
   },
   {
@@ -269,7 +270,7 @@
       { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 1, "money": -5, "health": -1, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
@@ -282,7 +283,7 @@
       { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 0, "money": 15, "health": -1, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "beauty", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
   },
   {
@@ -295,7 +296,7 @@
       { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": -1, "money": -10, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 1, "money": 10, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "savings", "charity"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
@@ -308,7 +309,7 @@
       { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 2, "money": 20, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "beauty", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
   },
   {
@@ -321,7 +322,7 @@
       { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": -2, "money": 0, "health": 1, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": 1, "suspicion": 1, "money": 10, "health": 0, "beauty": 1 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "beauty", "palace_maintenance", "savings", "charity"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
   },
   {
@@ -334,7 +335,7 @@
       { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": -1, "money": 10, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
@@ -347,7 +348,7 @@
       { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": -10, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "beauty", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
   },
   {
@@ -360,7 +361,7 @@
       { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 0, "money": 15, "health": -1, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "savings", "charity"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
@@ -373,7 +374,7 @@
       { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 2, "money": 25, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "beauty", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
   },
   {
@@ -386,7 +387,7 @@
       { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 1, "money": 20, "health": 0, "beauty": 1 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "beauty", "palace_maintenance", "savings", "charity"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
   },
   {
@@ -399,7 +400,7 @@
       { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": -1, "money": 10, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
@@ -412,7 +413,7 @@
       { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": -10, "health": 0, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 1, "money": 0, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "beauty", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
   },
   {
@@ -425,7 +426,7 @@
       { "label": "Choice B", "consequences": { "compassion": 0, "suspicion": 0, "money": 15, "health": -1, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": -1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "savings", "charity"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "fellow_maid", "none"]
   },
   {
@@ -438,7 +439,7 @@
       { "label": "Choice B", "consequences": { "compassion": 1, "suspicion": 0, "money": 0, "health": 1, "beauty": 0 }, "result": "Result B." },
       { "label": "Choice C", "consequences": { "compassion": 0, "suspicion": 2, "money": 25, "health": 0, "beauty": 0 }, "result": "Result C." }
     ],
-    "prep_options": ["food", "health", "beauty", "savings"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "none"]
   },
   {
@@ -451,7 +452,7 @@
       { "label": "Retire quietly and ask for nothing", "consequences": { "compassion": 1, "suspicion": -2, "money": 0, "health": 0, "beauty": 0 }, "result": "You disappear gracefully. The palace barely notices." },
       { "label": "Use everything you know to protect someone you love", "consequences": { "compassion": 3, "suspicion": 1, "money": -30, "health": 0, "beauty": 0 }, "result": "You spend yourself completely for another. It is enough." }
     ],
-    "prep_options": ["food", "health", "beauty", "palace_maintenance", "savings", "charity"],
+    "prep_options": ["food", "health", "beauty", "charity"],
     "alliance_pool": ["senior_eunuch", "noble_lady", "fellow_maid", "none"]
   }
 ]

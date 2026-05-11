@@ -23,6 +23,7 @@ let gs = {
   chosenChoice: -1,
   prepAllocations: {},
   yearStartMoney: 0,
+  deathType: null,
 };
 
 // ---- scene stuff
@@ -48,7 +49,14 @@ const palette = {
   muted: '#7a5c5c',
 };
 
-let startImg = null;
+let startImg       = null;
+let killedImg      = null;
+let deathSickImg   = null;
+let deathFoodImg   = null;
+let deathSusImg    = null;
+let deathWrongImg  = null;
+let bestEndingImg  = null;
+let okEndingImg    = null;
 
 // ---- music
 let shiqutrack   = null;   // all other scenes
@@ -73,7 +81,14 @@ function preload() {
   eventsData = loadJSON('events.json');
   alliesData = loadJSON('allies.json');
   attributesData = loadJSON('attributes.json');
-  startImg = loadImage('startpage.jpg');
+  startImg      = loadImage('startpage.jpg');
+  killedImg     = loadImage('killed-page.JPG');
+  deathSickImg  = loadImage('death-sick.JPG');
+  deathFoodImg  = loadImage('death-food.JPG');
+  deathSusImg   = loadImage('death-sus.JPG');
+  deathWrongImg = loadImage('death-wrong.JPG');
+  bestEndingImg = loadImage('best-ending.JPG');
+  okEndingImg   = loadImage('ok-ending.JPG');
   shiqutrack = loadSound('shiqu.mp3');
   shouxingtrack = loadSound('shouxing.mp3');
   yinmantrack = loadSound('yinman.mp3');
@@ -130,8 +145,9 @@ function applyAllyPassive() {
 }
 
 function checkDeathCondition() {
-  if (gs.health <= 0) return 'Your health has failed. You pass quietly, far from home.';
-  if (gs.food   <= 0) return 'Hunger claims you before suspicion can. You do not survive the season.';
+  if (gs.health     <= 0)  return { type: 'sick',      msg: 'Your health has failed. You pass quietly, far from home.' };
+  if (gs.food       <= 0)  return { type: 'food',      msg: 'Hunger claims you before suspicion can. You do not survive the season.' };
+  if (gs.suspicion  >= 10) return { type: 'suspicion', msg: 'Your accumulated suspicion has proved fatal. The palace closes around you like a fist.' };
   return null;
 }
 
@@ -144,7 +160,7 @@ function resetGS() {
     phase: 'intro',
     pendingConsequences: null, resultText: '',
     chosenChoice: -1, prepAllocations: {},
-    yearStartMoney: 0,
+    yearStartMoney: 0, deathType: null,
   };
 }
 
@@ -153,18 +169,33 @@ function advanceYear() {
   if (gs.year >= eventsData.length) { switchScene('end'); return; }
   gs.prepAllocations   = {};
   gs.scandalShieldUsed = false;
+
+  // Annual stat decay
+  gs.food = clamp(gs.food - 0.5, 0, 10);
+  if (Math.random() < 0.25) gs.health = clamp(gs.health - 1, 0, 10);
+  if (Math.random() < 0.25) gs.beauty = clamp(gs.beauty - 1, 0, 10);
+
   applyAllyPassive();
-  const deathMsg = checkDeathCondition();
-  if (deathMsg) { gs.resultText = deathMsg; switchScene('death'); return; }
+  const death = checkDeathCondition();
+  if (death) { gs.deathType = death.type; gs.resultText = death.msg; switchScene('death'); return; }
   switchScene('prep');
 }
 
 function selectChoice(i) {
   const ev = eventsData[gs.year];
   if (i < 0 || i >= ev.choices.length) return;
-  gs.chosenChoice        = i;
-  gs.pendingConsequences = ev.choices[i].consequences;
-  gs.resultText          = ev.choices[i].result;
+  const choice               = ev.choices[i];
+  gs.chosenChoice            = i;
+  gs.pendingConsequences     = choice.consequences;
+  gs.resultText              = choice.result;
+
+  // Check for instant condemned death before applying consequences
+  if (choice.death_type) {
+    gs.deathType = choice.death_type;
+    switchScene('death');
+    return;
+  }
+
   applyConsequences(gs.pendingConsequences);
   const allyData = gs.ally ? alliesData[gs.ally] : null;
   if (allyData && allyData.scandal_shield && !gs.scandalShieldUsed && gs.suspicion >= 7) {
@@ -172,8 +203,8 @@ function selectChoice(i) {
     gs.resultText += '\n\n[Your ally Ming Yue intervenes, dampening suspicion.]';
     gs.scandalShieldUsed = true;
   }
-  const deathMsg = checkDeathCondition();
-  if (deathMsg) { gs.resultText = deathMsg; switchScene('death'); }
+  const death = checkDeathCondition();
+  if (death) { gs.deathType = death.type; gs.resultText = death.msg; switchScene('death'); }
   else switchScene('result');
 }
 
@@ -788,71 +819,108 @@ class DeathScene {
   constructor() { this.alpha = 0; }
   onEnter() {
     this.alpha = 0;
-    playTrack(shiqutrack); // shiqu for death/other
+    stopMusic();
+  }
+
+  _img() {
+    if (gs.deathType === 'killed')    return killedImg;
+    if (gs.deathType === 'condemned') return deathWrongImg;
+    if (gs.deathType === 'sick')      return deathSickImg;
+    if (gs.deathType === 'food')      return deathFoodImg;
+    if (gs.deathType === 'suspicion') return deathSusImg;
+    return null;
   }
 
   draw() {
-    background(0);
-    if (this.alpha < 220) this.alpha = min(220, this.alpha + 1.5);
-    push();
-    drawingContext.globalAlpha = this.alpha / 255;
-    textFont('Newsreader');
+    const img = this._img();
 
-    fill(palette.red); noStroke(); textAlign(CENTER, CENTER); textSize(36);
-    text('薨逝', width / 2, height / 2 - 90);
+    if (img) {
+      // Image-based death screen
+      background(0);
+      if (this.alpha < 255) this.alpha = min(255, this.alpha + 3);
+      push();
+      drawingContext.globalAlpha = this.alpha / 255;
+      // Scale image to cover canvas
+      let imgAspect    = img.width / img.height;
+      let canvasAspect = width / height;
+      let dw, dh, dx, dy;
+      if (canvasAspect > imgAspect) {
+        dw = width; dh = width / imgAspect;
+      } else {
+        dh = height; dw = height * imgAspect;
+      }
+      dx = (width - dw) / 2;
+      dy = (height - dh) / 2;
+      image(img, dx, dy, dw, dh);
+      drawingContext.globalAlpha = 1;
+      pop();
+    } else {
+      // Natural death — original text screen
+      background(0);
+      if (this.alpha < 220) this.alpha = min(220, this.alpha + 1.5);
+      push();
+      drawingContext.globalAlpha = this.alpha / 255;
+      textFont('Newsreader');
 
-    fill(palette.cream); textSize(19);
-    const lines = wrapText(gs.resultText, min(520, width - 120));
-    let ty = height / 2 - 48;
-    for (let l of lines) { text(l, width / 2, ty); ty += 24; }
+      fill(palette.red); noStroke(); textAlign(CENTER, CENTER); textSize(36);
+      text('薨逝', width / 2, height / 2 - 90);
 
-    fill(palette.muted); textSize(15); ty += 10;
-    text('Year ' + (gs.year + 1) + '  ·  Age ' + eventsData[gs.year].age, width / 2, ty);
+      fill(palette.cream); textSize(19);
+      const lines = wrapText(gs.resultText, min(520, width - 120));
+      let ty = height / 2 - 48;
+      for (let l of lines) { text(l, width / 2, ty); ty += 24; }
 
-    drawingContext.globalAlpha = 1;
-    pop();
+      fill(palette.muted); textSize(15); ty += 10;
+      text('Year ' + (gs.year + 1) + '  ·  Age ' + eventsData[gs.year].age, width / 2, ty);
 
-    drawHint('Click anywhere to begin again');
+      drawingContext.globalAlpha = 1;
+      pop();
+
+      drawHint('Press Enter to begin again');
+    }
   }
 
-  mousePressed() { resetGS(); switchScene('intro'); }
+  keyPressed(k, kc) {
+    if (kc === 13) { resetGS(); switchScene('intro'); }
+  }
 }
 
 // ---- EndScene
 class EndScene {
-  _ending() {
-    if (gs.suspicion >= 8)   return { title: 'Condemned',     body: 'Your accumulated suspicion proved fatal. The palace closed around you like a fist.',                                         col: palette.red   };
-    if (gs.compassion >= 15) return { title: 'Beloved',       body: 'Your compassion became legend. The people of the inner court remembered your kindness long after you were gone.',            col: palette.jade  };
-    if (gs.money >= 200)     return { title: 'The Survivor',  body: 'You emerged from the palace with your secrets and your savings. A quiet victory, but a victory nonetheless.',              col: palette.gold  };
-    return                          { title: 'A Life Endured', body: 'You survived thirty-five years inside these walls. Not in triumph, not in ruin — but in stubborn, steady endurance.',      col: palette.cream };
+  constructor() { this.alpha = 0; }
+
+  _img() {
+    if (gs.suspicion  >= 8)  return deathSusImg;
+    if (gs.compassion >= 15) return bestEndingImg;
+    return okEndingImg;
   }
 
-  onEnter() { playTrack(shiqutrack); }
+  onEnter() { this.alpha = 0; stopMusic(); }
 
   draw() {
-    Backgrounds.palace();
-    const end = this._ending();
+    const img = this._img();
+    background(0);
+    if (this.alpha < 255) this.alpha = min(255, this.alpha + 3);
     push();
-    textFont('Newsreader');
-    fill(end.col); noStroke(); textAlign(CENTER, CENTER); textSize(36);
-    text(end.title, width / 2, height / 2 - 90);
-    goldDivider(width / 2 - 200, height / 2 - 66, 400);
-    fill(palette.cream); textSize(19);
-    const lines = wrapText(end.body, 520);
-    let ty = height / 2 - 40;
-    for (let l of lines) { text(l, width / 2, ty); ty += 24; }
-    fill(palette.muted); textSize(15); ty += 14;
-    text(
-      'Final stats — Coins: ' + gs.money +
-      '  Compassion: ' + gs.compassion +
-      '  Suspicion: ' + gs.suspicion,
-      width / 2, ty
-    );
+    drawingContext.globalAlpha = this.alpha / 255;
+    let imgAspect    = img.width / img.height;
+    let canvasAspect = width / height;
+    let dw, dh, dx, dy;
+    if (canvasAspect > imgAspect) {
+      dw = width; dh = width / imgAspect;
+    } else {
+      dh = height; dw = height * imgAspect;
+    }
+    dx = (width - dw) / 2;
+    dy = (height - dh) / 2;
+    image(img, dx, dy, dw, dh);
+    drawingContext.globalAlpha = 1;
     pop();
-    drawHint('Click anywhere to play again');
   }
 
-  mousePressed() { resetGS(); switchScene('intro'); }
+  keyPressed(k, kc) {
+    if (kc === 13) { resetGS(); switchScene('intro'); }
+  }
 }
 
 // ---- Window resize 

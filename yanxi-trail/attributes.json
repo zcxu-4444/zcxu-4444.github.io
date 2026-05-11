@@ -19,23 +19,11 @@
       "description": "Invest in cosmetics and fine garments to improve your appearance. Certain NPCs might like you more, but some might hate you regardless.",
       "effect": { "beauty": 1 }
     },
-    "savings": {
-      "id": "savings",
-      "label": "Savings",
-      "description": "Set coins aside carefully to invest into your other attributes and choices in.",
-      "effect": { "money": 15 }
-    },
     "charity": {
       "id": "charity",
       "label": "Charity",
       "description": "Donate to the poor or temple offerings. Your compassion grows.",
       "effect": { "compassion": 1 }
-    },
-    "palace_maintenance": {
-      "id": "palace_maintenance",
-      "label": "Palace Upkeep",
-      "description": "Pay for repairs and gifts to palace officials. Suspicion eases.",
-      "effect": { "suspicion": -1 }
     }
   }
 }
