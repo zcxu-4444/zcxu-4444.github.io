@@ -537,7 +537,7 @@ class NarrativeScene {
     pop();
 
     // --- snow + wipe ---
-    if (this.wiping) {
+    if (this.wiping && !this.fading) {
       // falling flakes
       push();
       fill(255); noStroke();
@@ -716,6 +716,7 @@ class AllyScene {
     if (!isNaN(n) && n >= 1 && n <= this.cards.length) { this._select(n - 1); return; }
     if ((k === ' ' || kc === 13) && this.selectedIdx >= 0) {
       gs.ally = this.cards[this.selectedIdx].key;
+      applyAllyPassive();
       switchScene('event');
     }
   }
@@ -819,7 +820,8 @@ class ResultScene {
     drawingContext.globalAlpha = 1;
     pop();
 
-    drawHint('Click anywhere to continue to the next year');
+    const isLastYear = gs.year >= eventsData.length - 1;
+    drawHint(isLastYear ? 'Click anywhere to see your ending' : 'Click anywhere to continue to the next year');
   }
 
   mousePressed() {
@@ -878,6 +880,8 @@ class DeathScene {
   keyPressed(k, kc) {
     if (kc === 13) { resetGS(); switchScene('intro'); }
   }
+
+  mousePressed() { resetGS(); switchScene('intro'); }
 }
 
 // ---- EndScene
